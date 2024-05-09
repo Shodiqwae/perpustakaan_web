@@ -5,8 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
 <body>
-    <h1>USEP</h1>
+    <div class="cover">
+
+        <div class="img">
+            <img class="size-img" src="{{ asset('asset/logo.png') }}" alt="logo">
+        </div>
+        <div class="container">
+            <div class="column">
+                <center>
+                    <div class="row">
+                        <p class="font" style="font-family: Inknut-Bold">Login</p>
+                    </div>
+                </center>
+                <center>
+                    <div class="row">
+                        <input type="email" placeholder="Gmail">
+                    </div>
+                </center>
+                <div class="row">
+                    <input type="password" placeholder="password">
+                </div>
+                <div class="row" style="text-align: right">
+                    <a href="#" style="text-decoration: none">
+                        <span style="color: white">Forgot Your</span>
+                        <span style="color: black">Password?</span>
+                    </a>
+                </div>
+                <div class="row" style="text-align: center">
+                    <button>Continue</button>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
 </body>
 </html>

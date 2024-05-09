@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controller\loginController;
+use App\Http\Controllers\loginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +14,4 @@ use App\Http\Controller\loginController;
 |
 */
 
-Route::get('/login', LoginPage() );
-
-
+Route::get('/login', [loginController::class, 'LoginPage']);

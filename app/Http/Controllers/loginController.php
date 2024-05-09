@@ -8,6 +8,6 @@ use Illuminate\Http\Request;
 class loginController extends Controller
 {
     public function LoginPage(){
-        return view ('login');
+        return view ('component.login');
     }
 }
