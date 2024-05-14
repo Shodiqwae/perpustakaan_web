@@ -33,19 +33,15 @@
             flex-grow: 1;
         }
 
-        .sidebar ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .sidebar li {
-            padding: 15px;
-        }
-
         .sidebar a {
             color: #f0f0f0;
             text-decoration: none;
+            display: block;
+            padding: 13px;
+        }
+
+        .sidebar a:hover {
+            background: #000000;
         }
 
         @media (max-width: 991.98px) {
@@ -67,18 +63,10 @@
           </nav>
           <div class="body-content">
             <div class="sidebar d-lg-block" id="navbarTogglerDemo02">
-                <ul>
-                    <li>
-                        <a href="#">Dashboard</a>
-                    </li>
-                    <li>
-                        <a href="#">Books</a>
-                    </li>
-                    <li>Categories</li>
-                    <li>Users</li>
-                    <li>Rent Log</li>
-                    <li>Log Out</li>
-                </ul>
+                    <a href="{{ route('dashboard') }}"> Dashboard</a>
+                    <a href="{{ route('books') }}"> Books </a>
+                    <a href="{{ route('rent') }}"> Rent Log </a>
+                    <a href="{{ route('logout') }}"> Log out  </a>
             </div>
             <div class="content">
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum molestias tenetur officia ad sit soluta, minus consequuntur. Commodi nobis, obcaecati quod delectus perspiciatis inventore officiis provident nulla unde nihil error!</p>

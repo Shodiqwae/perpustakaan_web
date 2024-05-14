@@ -13,7 +13,7 @@
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
         }
 
-        body{
+        body {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -33,7 +33,6 @@
            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5);
         }
 
-
         .login {
             width: 400px;
         }
@@ -41,60 +40,65 @@
         form {
             width: 250px;
             margin: 60px auto;
+            text-align: center; /* Menengahkan elemen form secara horizontal */
         }
 
         h1 {
-         margin: 0 20px 40px 20px; /* Ubah margin untuk mengatur jarak atas, kanan, bawah, dan kiri */
-         text-align: center;
-         font-weight: bolder;
-         text-transform: uppercase;
+            margin: 0 0 20px 0;
+            font-weight: bolder;
+            text-transform: uppercase;
         }
 
         hr {
-           margin: 0 20px 70px 20px;
-           border-top: 2px solid #000000;
+            margin: 0 20px 20px 20px;
+            border-top: 2px solid #000000;
         }
 
         p {
-            text-align: center;
-            margin: 10px;
-        }
-
-        .right img {
-            width: 450px;
-            height: 100%;
-            border-top-right-radius: 15px;
-            border-bottom-right-radius: 15px;
+            margin: 10px 0;
         }
 
         form label {
             display: block;
             font-size: 16px;
             font-weight: 600;
-            padding: 5px;
+            margin-bottom: 5px;
+            text-align: left; /* Memposisikan label ke kiri */
         }
 
         input {
-            width: 100%;
-            margin: 2px;
-            border: none;
-            outline: none;
+            width: calc(100% - 20px); /* Lebar input dikurangi padding */
+            margin-bottom: 10px;
             padding: 8px;
             border-radius: 5px;
             border: 1px solid gray;
         }
 
-        button {
+        .button {
+            display: inline-block;
+            padding: 10px 100px;
             border: none;
-            outline: none;
-            padding: 8px;
-            width: 252px;
-            color: #ffffff;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 20px;
             border-radius: 10px;
             background: #da1f1f;
+            color: #ffffff;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #b51717; /* Warna yang berbeda saat tombol disorot */
+        }
+
+        .button:focus {
+            outline: none; /* Menghapus garis putus-putus yang muncul saat tombol di-focus */
+        }
+
+        .button-wrapper {
+            display: flex;
+            justify-content: center; /* Menengahkan tombol secara horizontal */
         }
 
     </style>
@@ -105,12 +109,14 @@
             <form action="">
                 <h1>Login</h1>
                 <hr>
-                <p> Petuga Perpustakaan</p>
+                <p>Petuga Perpustakaan</p>
                 <label for="">Username</label>
                 <input type="text" placeholder="syifashadiq">
                 <label for="">Password</label>
                 <input type="password" placeholder="password">
-                <button>Login</button>
+                <div class="button-wrapper">
+                    <a href="{{ route('home') }}" class="button">Login</a>
+                </div>
             </form>
         </div>
         <div class="right"></div>
