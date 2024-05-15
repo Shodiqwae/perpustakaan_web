@@ -32,14 +32,14 @@
 
                 </center>
                 <div class="row" style="text-align: right;margin-right: 20px;">
-                    <a href="/login/forgotpassword" style="text-decoration: none">
+                    <a href="/forgotpasswordcustomer" style="text-decoration: none">
                         <span style="color: white">Forgot Your</span>
                         <span style="color: black">Password?</span>
                     </a>
                 </div>
                 <div class="row" style="text-align: center">
 
-                    <button onclick="window.location.href='/login'" >Continue</button>
+                    <button onclick="window.location.href='/'" >Continue</button>
                 </div>
                 <div class="row" style="height: 20px"></div>
             </div>

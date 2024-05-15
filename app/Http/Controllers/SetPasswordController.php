@@ -7,6 +7,6 @@ use Illuminate\Http\Request;
 class SetPasswordController extends Controller
 {
     public function SetPasswordPage(){
-        return view ('component.setPassword');
+        return view ('LoginCustomer.setPassword');
     }
 }

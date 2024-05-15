@@ -16,4 +16,75 @@ body {
     width: 100%; /* Menyesuaikan lebar dengan parent */
     top: 0; /* Mengatur posisi top ke 0 agar sesuai dengan body */
 }
+.size-img {
+    max-width: 20%;
+    height: auto;
+}
 
+.img {
+    margin-top: 30px;
+    display: flex;
+    position: relative; /* Menambahkan posisi relatif */
+}
+.container {
+    max-width: 400px;
+    margin-top: 60px;
+    margin-left: 17%;
+    display: grid; /* Mengatur container sebagai grid */
+    grid-template-columns: 10fr; /* Satu kolom */
+    gap: 10px; /* Spasi antara kolom dan baris */
+}
+
+.column {
+    display: grid; /* Kolom memiliki display grid */
+    grid-template-rows: repeat(3, auto); /* Tiga baris dengan tinggi otomatis */
+    padding: 10px; /* Padding untuk konten kolom */
+
+}
+
+.row {
+    padding: 5px; /* Padding untuk konten baris */
+}
+.font{
+    color: white;
+    font-size: 1.6rem;
+    font-family: 'Inknut-Bold',;
+    line-height: 1;
+    text-align: center;
+}
+
+input{
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    height: 40px;
+    width: 400px;
+    background-color: #f9f9f9;
+    outline: none;
+    font-size: 15px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+p{
+    font-size: 1.3rem;
+    line-height: 0;
+    color: white;
+}
+
+
+button {
+    margin-top: 10px;
+    height: 40px;
+    width: 260px;
+    border-radius: 10px;
+    text-decoration: none;
+    background-color: rgba(236, 239, 248, 1);
+    color: black;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+}
+button:hover{
+    color: white;
+    background-color: rgb(93, 99, 195);
+}

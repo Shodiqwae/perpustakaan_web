@@ -28,7 +28,7 @@
                 <center>
 
                     <div class="row">
-                        <button onclick="window.location.href='/login'" >Continue</button>
+                        <button onclick="window.location.href='/SetPasswordcustomer'" >Continue</button>
                     </div>
                 </center>
             </div>
