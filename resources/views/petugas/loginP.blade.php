@@ -111,9 +111,9 @@
                 <hr>
                 <p>Petuga Perpustakaan</p>
                 <label for="">Username</label>
-                <input type="text" placeholder="syifashadiq">
+                <input type="text" placeholder="Username">
                 <label for="">Password</label>
-                <input type="password" placeholder="password">
+                <input type="password" placeholder="Password">
                 <div class="button-wrapper">
                     <a href="{{ route('home') }}" class="button">Login</a>
                 </div>
