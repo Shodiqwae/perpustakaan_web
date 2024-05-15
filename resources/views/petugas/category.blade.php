@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Home</title>
+    <title>Category</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/style1.css') }}">
 </head>
@@ -23,14 +23,41 @@
           <div class="body-content">
             <div class="sidebar d-lg-block" id="navbarTogglerDemo02">
                     <a href="home"> Dashboard</a>
-                    <a href="books" class="active"> Books </a>
-                    <a href="category">Category</a>
-                    <a href="rent"> Rent Log </a>
+                    <a href="books"> Books </a>
+                    <a href="category" class="active">Category</a>
+                    <a href="rent" > Rent Log </a>
                     <a href="login"> Log out  </a>
                     <a href=""></a>
             </div>
             <div class="content">
-               <h3>ini halaman buku</h3>
+              <h2>Category List</h2>
+
+              <div class="mt-5">
+                <a href="#" class="btn btn-primary">Add Data</a>
+              </div>
+              <div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Name</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($categories as $item)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $item->name }}</td>
+                            <td>
+                                <a href="#">Edit</a>
+                                <a href="#">Delete</a>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+              </div>
             </div>
         </div>
     </div>
