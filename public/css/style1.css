@@ -1,0 +1,99 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.body-content {
+    flex-grow: 1;
+    display: flex;
+}
+
+.sidebar {
+    background: #ffffff;
+    color: rgb(188, 192, 192);
+    overflow-y: auto;
+    padding: 0;
+    min-width: 250px; /* Set minimum width for the sidebar */
+    flex-shrink: 0; /* Ensure sidebar doesn't shrink */
+}
+
+.content {
+    background: #f0f0f0;
+    padding: 30px;
+    flex-grow: 1;
+}
+
+.sidebar a {
+    color: #000000;
+    text-decoration: none;
+    display: block;
+    padding: 13px;
+}
+
+.sidebar a:hover {
+    background: #7af4d7;
+}
+
+.active {
+    background: #33b4ba;
+    border-right: solid 10px rgb(108, 211, 237);
+}
+
+@media (max-width: 991.98px) {
+    .body-content {
+        flex-direction: column;
+    }
+}
+
+.card-data {
+    border: solid;
+    position: relative;
+    padding: 20px 50px;
+    color: #ffff;
+}
+
+.card-data-book{
+    background-color: teal;
+    color: #f0f0f0;
+}
+
+.card-data-category{
+    background-color: rgb(81, 162, 219);
+    color: #f0f0f0;
+}
+
+.card-data .info {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: right;
+}
+
+ i {
+    font-size: 60px;
+}
+
+.card-desc {
+    font-size: 30px;
+}
+
+.card-count {
+    font-size: 20px;
+}
+
+.card-data-book, .card-data-category {
+    position: relative;
+}
+.card-data-book .info, .card-data-category .info {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: right;
+}
+
+.navbar .form-control {
+    margin-left: 110px;
+}
