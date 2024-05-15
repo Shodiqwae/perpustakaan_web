@@ -4,7 +4,7 @@
 }
 
 body {
-    background: url("../asset/bg_1715249891898.jpeg") no-repeat center center fixed ;
+    background: url("../images/bg_1715249891898.jpeg") no-repeat center center fixed ;
     background-size: cover;
     margin: 0; /* Menghapus margin default dari body */
     height: 100vh; /* Mengatur tinggi body menjadi 100% dari viewport height */
@@ -29,7 +29,7 @@ body {
     top: 0; /* Mengatur posisi top ke 0 agar sesuai dengan body */
 }
 .container {
-  
+
     max-width: 530px;
     border-radius: 10px;
     margin-left: 16%;

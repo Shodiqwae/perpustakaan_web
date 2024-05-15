@@ -29,7 +29,7 @@
         </nav>
         <div class="body-content">
             <div class="sidebar d-lg-block collapse" id="navbarTogglerDemo02">
-                <a href="home" class="active"> Dashboard</a>
+                <a href="/HomePageCustomer" class="active"> Discover </a>
                 <a href="books"> Books </a>
                 <a href="category">Category</a>
                 <a href="rent"> Rent Log </a>

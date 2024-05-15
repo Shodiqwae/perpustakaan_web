@@ -29,15 +29,16 @@
     text-decoration: none;
     display: block;
     padding: 13px;
+    font-weight: bold;
 }
 
 .sidebar a:hover {
-    background: #7af4d7;
+    background: rgb(64, 68, 129);
 }
 
 .active {
-    background: #33b4ba;
-    border-right: solid 10px rgb(108, 211, 237);
+    background: rgb(93, 99, 195);
+    border-right: solid 10px rgb(93, 99, 195);
 }
 
 @media (max-width: 991.98px) {
