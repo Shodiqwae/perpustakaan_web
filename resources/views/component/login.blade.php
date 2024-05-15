@@ -25,18 +25,23 @@
                         <input type="email" placeholder="Gmail">
                     </div>
                 </center>
-                <div class="row">
-                    <input type="password" placeholder="password">
-                </div>
-                <div class="row" style="text-align: right">
-                    <a href="#" style="text-decoration: none">
+                <center>
+                    <div class="row">
+                        <input type="password" placeholder="password">
+                    </div>
+
+                </center>
+                <div class="row" style="text-align: right;margin-right: 20px;">
+                    <a href="/login/forgotpassword" style="text-decoration: none">
                         <span style="color: white">Forgot Your</span>
                         <span style="color: black">Password?</span>
                     </a>
                 </div>
                 <div class="row" style="text-align: center">
-                    <button>Continue</button>
+
+                    <button onclick="window.location.href='/login'" >Continue</button>
                 </div>
+                <div class="row" style="height: 20px"></div>
             </div>
         </div>
 

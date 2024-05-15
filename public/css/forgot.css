@@ -9,7 +9,13 @@ body {
     margin: 0; /* Menghapus margin default dari body */
     height: 100vh; /* Mengatur tinggi body menjadi 100% dari viewport height */
 }
-
+.cover {
+    height: 100%; /* Mengatur tinggi cover menjadi 100% dari tinggi body */
+    background-color: rgba(0, 0, 0, 0.251);
+    position: absolute; /* Mengubah posisi menjadi absolute */
+    width: 100%; /* Menyesuaikan lebar dengan parent */
+    top: 0; /* Mengatur posisi top ke 0 agar sesuai dengan body */
+}
 .size-img {
     max-width: 20%;
     height: auto;
@@ -20,23 +26,14 @@ body {
     display: flex;
     position: relative; /* Menambahkan posisi relatif */
 }
-
-.cover {
-    height: 100%; /* Mengatur tinggi cover menjadi 100% dari tinggi body */
-    background-color: rgba(0, 0, 0, 0.543);
-    position: absolute; /* Mengubah posisi menjadi absolute */
-    width: 100%; /* Menyesuaikan lebar dengan parent */
-    top: 0; /* Mengatur posisi top ke 0 agar sesuai dengan body */
-}
 .container {
-  
-    max-width: 530px;
-    border-radius: 10px;
-    margin-left: 16%;
-    margin-top: 20px;
+    max-width: 650px;
+    margin-top: 60px;
+    margin-left: 13%;
     display: grid; /* Mengatur container sebagai grid */
     grid-template-columns: 10fr; /* Satu kolom */
     gap: 10px; /* Spasi antara kolom dan baris */
+
 }
 
 .column {
@@ -52,24 +49,31 @@ body {
 
 .font{
     color: white;
-    font-size: 2.5rem;
+    font-size: 1.9rem;
     font-family: 'Inknut-Bold',;
-    line-height: 1;
-    text-align: center;
+    line-height: 0;
 }
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
 
 input{
     border: 1px solid #ccc;
     border-radius: 5px;
-    height: 40px;
-    width: 450px;
+    height: 30px;
+    width: 300px;
     background-color: #f9f9f9;
     outline: none;
-    font-size: 15px;
+    font-size: 20px;
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 button {
+
     margin-top: 10px;
     height: 40px;
     width: 260px;
@@ -86,4 +90,3 @@ button:hover{
     color: white;
     background-color: rgb(93, 99, 195);
 }
-

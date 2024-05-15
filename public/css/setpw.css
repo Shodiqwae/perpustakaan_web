@@ -1,0 +1,19 @@
+@font-face {
+    font-family: 'Inknut-Bold';
+    src: url('../fonts/InknutAntiqua-Bold.ttf') format('truetype');
+}
+
+body {
+    background: url("../asset/bg_1715249891898.jpeg") no-repeat center center fixed ;
+    background-size: cover;
+    margin: 0; /* Menghapus margin default dari body */
+    height: 100vh; /* Mengatur tinggi body menjadi 100% dari viewport height */
+}
+.cover {
+    height: 100%; /* Mengatur tinggi cover menjadi 100% dari tinggi body */
+    background-color: rgba(0, 0, 0, 0.543);
+    position: absolute; /* Mengubah posisi menjadi absolute */
+    width: 100%; /* Menyesuaikan lebar dengan parent */
+    top: 0; /* Mengatur posisi top ke 0 agar sesuai dengan body */
+}
+
