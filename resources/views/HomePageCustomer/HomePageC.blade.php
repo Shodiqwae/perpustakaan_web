@@ -31,11 +31,12 @@
             <div class="sidebar d-lg-block collapse" id="navbarTogglerDemo02">
                 <a href="/HomePageCustomer" class="active"> Discover </a>
                 <a href="/YourLibrary"> My Library </a>
-                <a href="category">Favorite</a>
+                <a href="/Favorite">Favorite</a>
                 <a href="login"> Log out </a>
             </div>
-            <div class="content">
-                    <div class="content bg-white " style=" border-radius: 20px; font-family: Inknut-Bold;">
+            {{-- ini adalah isi buku --}}
+            <div class="content ">
+                    <div class="content bg-white scrollable-content" style=" border-radius: 20px; font-family: Inknut-Bold; height: 100vh">
                         <div class="row">
                             <h2>Category</h2>
                         </div>
@@ -58,7 +59,7 @@
                           </ul>
                             <div class="container">
                              <div class="row">
-                                <div class="col-md-3 custom-col">
+                                <div class="col-md-3 custom-col" style="margin-top: 20px">
                                     <div class="card shadow">
                                         <img src="{{ asset('images/buku1.png') }}" class="card-img-top" alt="kepo" style="height: 30vh; object-fit: cover;">
                                         <div class="card-body">
@@ -75,7 +76,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-3 custom-col">
+                                <div class="col-md-3 custom-col" style="margin-top: 20px">
                                     <div class="card shadow">
                                         <img src="{{ asset('images/biology.png') }}" class="card-img-top" alt="kepo" style="height: 30vh; object-fit: cover;">
                                         <div class="card-body">
@@ -92,7 +93,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-3 custom-col">
+                                <div class="col-md-3 custom-col" style="margin-top: 20px">
                                     <div class="card shadow">
                                         <img src="{{ asset('images/buku1.png') }}" class="card-img-top" alt="kepo" style="height: 30vh; object-fit: cover;">
                                         <div class="card-body">
@@ -109,7 +110,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-3 custom-col">
+                                <div class="col-md-3 custom-col" style="margin-top: 20px">
                                     <div class="card shadow">
                                         <img src="{{ asset('images/buku1.png') }}" class="card-img-top" alt="kepo" style="height: 30vh; object-fit: cover;">
                                         <div class="card-body">
@@ -126,7 +127,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-3 custom-col">
+                                <div class="col-md-3 custom-col" style="margin-top: 20px">
                                     <div class="card shadow">
                                         <img src="{{ asset('images/buku1.png') }}" class="card-img-top" alt="kepo" style="height: 30vh; object-fit: cover;">
                                         <div class="card-body">
@@ -152,7 +153,7 @@
                                 <h2>Recommended</h2>
                                 <div class="container">
                                     <div class="row">
-                                       <div class="col-md-3 custom-col">
+                                       <div class="col-md-3 custom-col" style="margin-top: 20px">
                                            <div class="card shadow">
                                                <img src="{{ asset('images/buku1.png') }}" class="card-img-top" alt="kepo" style="height: 30vh; object-fit: cover;">
                                                <div class="card-body">
@@ -169,7 +170,7 @@
                                            </div>
                                        </div>
 
-                                       <div class="col-md-3 custom-col">
+                                       <div class="col-md-3 custom-col" style="margin-top: 20px">
                                            <div class="card shadow">
                                                <img src="{{ asset('images/buku1.png') }}" class="card-img-top" alt="kepo" style="height: 30vh; object-fit: cover;">
                                                <div class="card-body">
@@ -186,7 +187,7 @@
                                            </div>
                                        </div>
 
-                                       <div class="col-md-3 custom-col">
+                                       <div class="col-md-3 custom-col" style="margin-top: 20px">
                                            <div class="card shadow">
                                                <img src="{{ asset('images/buku1.png') }}" class="card-img-top" alt="kepo" style="height: 30vh; object-fit: cover;">
                                                <div class="card-body">
@@ -203,7 +204,7 @@
                                            </div>
                                        </div>
 
-                                       <div class="col-md-3 custom-col">
+                                       <div class="col-md-3 custom-col" style="margin-top: 20px">
                                            <div class="card shadow">
                                                <img src="{{ asset('images/buku1.png') }}" class="card-img-top" alt="kepo" style="height: 30vh; object-fit: cover;">
                                                <div class="card-body">
@@ -220,7 +221,7 @@
                                            </div>
                                        </div>
 
-                                       <div class="col-md-3 custom-col">
+                                       <div class="col-md-3 custom-col" style="margin-top: 20px">
                                            <div class="card shadow">
                                                <img src="{{ asset('images/buku1.png') }}" class="card-img-top" alt="kepo" style="height: 30vh; object-fit: cover;">
                                                <div class="card-body">
@@ -236,6 +237,22 @@
                                                </div>
                                            </div>
                                        </div>
+                                       <div class="col-md-3 custom-col" style="margin-top: 20px">
+                                        <div class="card shadow">
+                                            <img src="{{ asset('images/buku1.png') }}" class="card-img-top" alt="kepo" style="height: 30vh; object-fit: cover;">
+                                            <div class="card-body">
+                                                <h5 class="card-title custom-text" >The Hike To Home</h5>
+                                                <p class="card-text" style="color: rgb(110, 110, 110);">Novel</p>
+                                                <div class="row">
+                                                    <div class="d-flex ">
+                                                    <img src="{{ asset('images/star1.png') }}" alt="bintanh" style="height: 1.3pc; width: 1.3pc">
+                                                    <p style="font-size: 14px; color: rgb(110, 110, 110); margin-left: 10px">4.5</p>
+                                                    <button class="btn btn-secondary " style="font-size: 12px; height: 30px; margin-left: 40px"> online </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
                                        </div>
                                     </div>

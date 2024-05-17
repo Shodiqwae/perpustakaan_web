@@ -7,6 +7,7 @@ use App\Http\Controllers\SetPasswordController;
 use App\Http\Controllers\LoginPetugas;
 use App\Http\Controllers\HomePageCustomer;
 use App\Http\Controllers\MylibraryController;
+use App\Http\Controllers\FavoritePageC;
 
 
 /*
@@ -29,6 +30,7 @@ Route::get('/SetPasswordcustomer', [SetPasswordController::class, 'SetPasswordPa
 /* HomePage Customer */
 Route::get('/HomePageCustomer', [HomePageCustomer::class, 'HomePageCustomer']);
 Route::get('/YourLibrary', [MylibraryController::class, 'Mylibrary']);
+Route::get('/Favorite', [FavoritePageC::class, 'FavoritePage']);
 
 Route::get('/loginpetugas', [LoginPetugas::class, 'LoginPetugas']);
 Route::get('home', [App\Http\Controllers\HomeController::class, 'homePage'])->name('home');

@@ -11,7 +11,7 @@
     <div class="cover">
 
         <div class="img">
-            <img class="size-img" src="{{ asset('asset/logo.png') }}" alt="logo">
+            <img class="size-img" src="{{ asset('images/logo.png') }}" alt="logo">
         </div>
         <div class="container">
             <div class="column">
@@ -31,15 +31,9 @@
                     </div>
 
                 </center>
-                <div class="row" style="text-align: right;margin-right: 20px;">
-                    <a href="/forgotpasswordcustomer" style="text-decoration: none">
-                        <span style="color: white">Forgot Your</span>
-                        <span style="color: black">Password?</span>
-                    </a>
-                </div>
                 <div class="row" style="text-align: center">
 
-                    <button onclick="window.location.href='/'" >Continue</button>
+                    <button onclick="window.location.href='/HomePageCustomer'" >Continue</button>
                 </div>
                 <div class="row" style="height: 20px"></div>
             </div>

@@ -109,15 +109,19 @@
      /* Mengatur margin otomatis agar kolom berada di tengah */
   }
 
-  .scrollable-content {
-    max-height: 80vh; /* Adjust the height as needed */
-    overflow-y: auto;
-}
-
 .custom-text{
 
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     font-size: 15px;
+}
+
+
+
+.favorite-custom{
+    width: 40px;
+    height: 40px;
+
+    float: right;
 }
