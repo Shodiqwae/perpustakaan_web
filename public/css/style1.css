@@ -109,3 +109,16 @@
     font-weight: bold;
 }
 
+.btn-link-e {
+    background-color: rgb(76, 191, 108);
+    color: #ffffff;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.btn-link-d {
+    background-color: rgb(253, 58, 84);
+    color: #ffffff;
+    text-decoration: none;
+    margin-right: 10px;
+}

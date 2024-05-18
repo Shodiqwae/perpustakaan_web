@@ -10,13 +10,14 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::all();
-        return view('petugas-category', ['categories' => $categories]);
+
+        return view('category');
     }
 
     public function add()
     {
-        return view('category-add');
+        $categories = Category::all();
+        return view('category-add', ['categories' => $categories]);
     }
 
     public function store(Request $request)

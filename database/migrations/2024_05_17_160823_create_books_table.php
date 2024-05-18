@@ -15,9 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('book_code');
             $table->string('title');
-            $table->string('status')->default('in stock');
+            $table->string('author')->default('Unknown'); // Tambahkan default value untuk author
+            $table->string('slug')->default('default-slug'); // Tambahkan default value untuk slug
+            $table->string('status')->default('default_value');
             $table->timestamps();
         });
+
     }
 
     /**

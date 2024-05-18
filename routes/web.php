@@ -35,9 +35,19 @@ Route::get('/YourLibrary', [MylibraryController::class, 'Mylibrary']);
 Route::get('login', [App\Http\Controllers\LoginController::class,'loginPage'])->name('login');
 Route::get('home', [App\Http\Controllers\HomeController::class, 'homePage'])->name('home');
 Route::get('dashboard', [App\Http\Controllers\DashboardController::class, 'dashboardpage'])->name('dashboard');
+
+//Route Book petugas
 Route::get('books', [App\Http\Controllers\booksController::class, 'booksPage'])->name('books');
+Route::get('books/create', [booksController::class, 'create'])->name('books.create');
+Route::post('books', [booksController::class, 'store'])->name('books.store');
+
+
+
+
 Route::get('logout', [App\Http\Controllers\LogoutController::class, 'logPage'])->name('logout');
 Route::get('rent', [App\Http\Controllers\RentController::class, 'rentPage'])->name('rent');
+
+//Route Category petugas
 Route::get('category', [App\Http\Controllers\CategoryController::class, 'index'])->name('category');
 Route::get('category-add', [App\Http\Controllers\CategoryController::class, 'add'])->name('category-add');
 Route::get('/category-edit/{slug}', [CategoryController::class, 'edit'])->name('category-edit');
@@ -49,3 +59,5 @@ Route::get('/category-deleted', [CategoryController::class, 'deleted'])->name('c
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
 Route::get('/categories/add', [CategoryController::class, 'add'])->name('categories.add');
 Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
+
+

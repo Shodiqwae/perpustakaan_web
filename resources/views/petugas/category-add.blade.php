@@ -31,6 +31,11 @@
             </div>
             <div class="content">
               <h2>Add New Category</h2>
+
+              <div class="d-flex justify-content-end mt-3">
+                <a href="category" class="btn btn-secondary me-5">Back</a>
+              </div>
+
               <div class="mt-5 w-50">
 
                 @if ($errors->any())
