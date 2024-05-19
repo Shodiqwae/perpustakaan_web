@@ -97,3 +97,28 @@
 .navbar .form-control {
     margin-left: 110px;
 }
+
+
+.flora {
+    margin-right: 50px;
+}
+
+
+.text-light-1 {
+    color: #000000;
+    font-weight: bold;
+}
+
+.btn-link-e {
+    background-color: rgb(76, 191, 108);
+    color: #ffffff;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.btn-link-d {
+    background-color: rgb(253, 58, 84);
+    color: #ffffff;
+    text-decoration: none;
+    margin-right: 10px;
+}

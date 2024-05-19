@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Category</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ asset('css/style1.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 <body>
     <div class="main">
@@ -22,20 +22,30 @@
           </nav>
           <div class="body-content">
             <div class="sidebar d-lg-block" id="navbarTogglerDemo02">
-                    <a href="home"> Dashboard</a>
-                    <a href="books"> Books </a>
-                    <a href="category" class="active">Category</a>
-                    <a href="rent" > Rent Log </a>
-                    <a href="login"> Log out  </a>
-                    <a href=""></a>
+                <a href="home"> Dashboard</a>
+                <a href="books"> Books </a>
+                <a href="category" class="active">Category</a>
+                <a href="rent" > Rent Log </a>
+                <a href="login"> Log out  </a>
+                <a href=""></a>
             </div>
             <div class="content">
               <h2>Category List</h2>
 
-              <div class="mt-5">
-                <a href="#" class="btn btn-primary">Add Data</a>
+              <div class="mt-5 d-flex justify-content-end">
+                <a href="category-deleted" class="btn btn-secondary me-5">View Deleted Data</a>
+                <a href="category-add" class="btn btn-primary">Add Data</a>
               </div>
-              <div>
+
+              <div class="mt-5">
+                @if (session('status'))
+                <div class="alert alert-success">
+                  {{ session('status') }}
+                </div>
+                @endif
+              </div>
+
+              <div class="my-5">
                 <table class="table">
                     <thead>
                         <tr>
@@ -45,20 +55,25 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($categories as $item)
+                        @foreach($categories as $index => $category)
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $item->name }}</td>
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{ $category->name }}</td>
                             <td>
-                                <a href="#">Edit</a>
-                                <a href="#">Delete</a>
+                                <a href="{{ route('category-edit', $category->slug) }}">
+                                    Edit
+                                </a>
+                                <form action="{{ route('category-delete', $category->slug) }}" method="POST" style="display: inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn-link">Delete</button>
+                                </form>
                             </td>
                         </tr>
-                        @endforeach
+                    @endforeach
                     </tbody>
                 </table>
               </div>
-            </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
