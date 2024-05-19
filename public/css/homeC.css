@@ -38,12 +38,12 @@
 }
 
 .sidebar a:hover {
-    background: rgb(6, 59, 216);
+    background: rgb(27, 12, 168);
 }
 
 .active {
-    background: rgb(63, 98, 201);
-    border-right: solid 10px rgb(63, 98, 201);
+    background: rgb(6, 59, 216);
+    border-right: solid 10px rgb(6, 59, 216);
 }
 
 @media (max-width: 991.98px) {

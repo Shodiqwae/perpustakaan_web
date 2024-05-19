@@ -28,11 +28,11 @@
             </div>
         </nav>
         <div class="body-content">
-            <div class="sidebar d-lg-block collapse" id="navbarTogglerDemo02">
-                <a href="/HomePageCustomer" class="active"> Discover </a>
-                <a href="/YourLibrary"> My Library </a>
-                <a href="/Favorite">Favorite</a>
-                <a href="login"> Log out </a>
+            <div class="sidebar d-lg-block collapse" id="navbarTogglerDemo02" style="background-color: rgb(90, 90, 205); ">
+                <a href="/HomePageCustomer" class="active" style="color: white"> Discover </a>
+                <a href="/YourLibrary" style="color: white"> My Library </a>
+                <a href="/Favorite" style="color: white">Favorite</a>
+                <a href="login" style="color: white"> Log out </a>
             </div>
             {{-- ini adalah isi buku --}}
             <div class="content ">
