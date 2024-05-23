@@ -6,12 +6,12 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Category;
 
-class CategoryController extends Controller
+class CategorypController extends Controller
 {
     public function index()
     {
 
-        return view('category');
+        return view('petugas.category');
     }
 
     public function add()

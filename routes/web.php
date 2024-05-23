@@ -7,6 +7,10 @@ use App\Http\Controllers\SetPasswordController;
 use App\Http\Controllers\LoginPetugas;
 use App\Http\Controllers\HomePageCustomer;
 use App\Http\Controllers\MylibraryController;
+use APP\Http\Controllers\RegisAController;
+use App\Http\Controllers\HomeAController;
+use App\Http\Controllers\UsernameAController;
+use App\Http\Controllers\LoginAController;
 
 
 /*
@@ -60,4 +64,10 @@ Route::get('/categories', [CategoryController::class, 'index'])->name('categorie
 Route::get('/categories/add', [CategoryController::class, 'add'])->name('categories.add');
 Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
 
+
+// Route Admin
+Route::get('loginA', [LoginAController::class, 'LoginA'])->name('loginA');
+Route::get('homeA', [HomeAController::class, 'HomeA'])->name('homeA');
+Route::get('regis', [RegisAController::class, 'RegisA'])->name('regis');
+Route::get('username', [UsernameAController::class, 'Username'])->name('username');
 
