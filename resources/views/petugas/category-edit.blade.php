@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Edit Category</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style1.css') }}">
 </head>
 <body>
     <div class="main">
@@ -43,6 +43,7 @@
 
                 <form action="{{ route('category-update', ['slug' => $category->slug]) }}" method="post">
                     @csrf
+                    @method('PUT') <!-- Tambahkan metode PUT -->
                     <div class="form-group mb-3">
                         <label for="name" class="form-label">Category Name</label>
                         <input type="text" name="name" id="name" class="form-control" value="{{ $category->name }}" placeholder="Enter category name">

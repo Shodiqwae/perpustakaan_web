@@ -4,15 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Cviebrock\EloquentSluggable\sluggable;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 
-class category extends Model
+class Category extends Model
 {
     use HasFactory;
-    use sluggable;
+    use Sluggable;
     use SoftDeletes;
-
 
     protected $fillable = ['name', 'slug', 'updated_at', 'created_at'];
 

@@ -43,7 +43,7 @@
                             <i class="bi bi-journal-bookmark me-3"></i>
                             <div class="info">
                                 <span class="card-desc">Books</span><br>
-                                <span class="card-count">{{ $book_count }}</span>
+                                <span class="card-count"></span>
                             </div>
                         </div>
                     </div>
@@ -52,7 +52,7 @@
                             <i class="bi bi-list-stars"></i>
                             <div class="info">
                                 <span class="card-desc">Category</span><br>
-                                <span class="card-count">{{ $category_count }}</span>
+                                <span class="card-count"></span>
                             </div>
                         </div>
                     </div>

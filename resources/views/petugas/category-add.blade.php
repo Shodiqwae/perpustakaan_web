@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Add Category</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style1.css') }}">
 </head>
 <body>
     <div class="main">
@@ -36,7 +36,7 @@
                 <a href="category" class="btn btn-secondary me-5">Back</a>
               </div>
 
-              <div class="mt-5 w-50">
+              <div class="mt-5 w-25">
 
                 @if ($errors->any())
                 <div class="alert alert-danger">
@@ -55,7 +55,7 @@
                         <label for="name" class="from-label">Category Name</label>
                         <input type="text" name="name" id="name" class="form-control" placeholder="Enter category name">
                     </div>
-                    <div class="mt-3">
+                    <div class="mt-5">
                         <button class="btn btn-success" type="submit">Save</button>
                     </div>
                 </form>

@@ -7,7 +7,21 @@
     <title>Home</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-   <link rel="stylesheet" href="{{ asset("css/homeC.css") }}">
+    <link rel="stylesheet" href="{{ asset("css/homeC.css") }}">
+
+    <style>
+    .nav-pills .animated-button {
+       background-color: blue; /* Warna latar belakang awal */
+       color: white; /* Warna teks awal */
+    }
+
+ /* Gaya untuk tautan navigasi yang aktif */
+    .nav-pills .animated-button.active-button {
+       box-shadow: 0 0 0 5px #010a8a;
+       color: #ffffff;
+       background-color: blue; /* Warna latar belakang saat tautan aktif */
+    }
+    </style>
 </head>
 <body>
     <div class="main">
@@ -28,124 +42,51 @@
             </div>
         </nav>
         <div class="body-content">
-            <div class="sidebar d-lg-block collapse" id="navbarTogglerDemo02" style="background-color: rgb(90, 90, 205); ">
+            <div class="sidebar d-lg-block collapse" id="navbarTogglerDemo02" style="background-color: rgb(41, 41, 171); ">
                 <a href="/HomePageCustomer" class="active" style="color: white"> Discover </a>
-                <a href="/YourLibrary" style="color: white"> My Library </a>
-                <a href="/Favorite" style="color: white">Favorite</a>
-                <a href="login" style="color: white"> Log out </a>
+                <a href="/YourLibrary" class="sidebar-custom" style="color: white"> My Library </a>
+                <a href="/Favorite" class="sidebar-custom" style="color: white">Favorite</a>
+                <a href="login" class="sidebar-custom" style="color: white"> Log out </a>
             </div>
             {{-- ini adalah isi buku --}}
             <div class="content ">
-                    <div class="content bg-white scrollable-content" style=" border-radius: 20px; font-family: Inknut-Bold; height: 100vh">
+                    <div class="content bg-white scrollable-content  nav-pills justify-content-left" style=" border-radius: 20px; font-family: Inknut-Bold; height: 100vh">
                         <div class="row">
                             <h2>Category</h2>
                         </div>
                         <ul class="list-inline" style="margin-top: 20px">
-                            <li class="list-inline-item">
-                                <button class="btn btn-primary"> All </button>
+                            <li class="list-inline-item ">
+                                <button href="#All" class="animated-button " data-toggle="pill">
+                                    <span>All</span>
+                                    <span></span>
+                                  </button>
                             </li>
                             <li class="list-inline-item">
-                                <button class="btn btn-primary"> Novel </button>
+                                <button href="" class="animated-button">
+                                    <span>Novel</span>
+                                    <span></span>
+                                  </button>
                             </li>
                             <li class="list-inline-item">
-                                <button class="btn btn-primary"> Comic </button>
+                                <button class="animated-button">
+                                    <span>Comic</span>
+                                    <span></span>
+                                  </button>
                             </li>
                             <li class="list-inline-item">
-                                <button class="btn btn-primary"> History </button>
+                                <button class="animated-button">
+                                    <span>History</span>
+                                    <span></span>
+                                  </button>
                             </li>
                             <li class="list-inline-item">
-                                <button class="btn btn-primary"> Knowledge </button>
+                                <button href="" class="animated-button">
+                                    <span>Knowledge</span>
+                                    <span></span>
+                                  </button>
                             </li>
                           </ul>
-                            <div class="container">
-                             <div class="row">
-                                <div class="col-md-3 custom-col" style="margin-top: 20px">
-                                    <div class="card shadow">
-                                        <img src="{{ asset('images/buku1.png') }}" class="card-img-top" alt="kepo" style="height: 30vh; object-fit: cover;">
-                                        <div class="card-body">
-                                            <h5 class="card-title custom-text" >The Hike To Home</h5>
-                                            <p class="card-text" style="color: rgb(110, 110, 110);">Novel</p>
-                                            <div class="row">
-                                                <div class="d-flex ">
-                                                <img src="{{ asset('images/star1.png') }}" alt="bintanh" style="height: 1.3pc; width: 1.3pc">
-                                                <p style="font-size: 14px; color: rgb(110, 110, 110); margin-left: 10px">4.5</p>
-                                                <button class="btn btn-secondary " style="font-size: 12px; height: 30px; margin-left: 40px"> online </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <div class="col-md-3 custom-col" style="margin-top: 20px">
-                                    <div class="card shadow">
-                                        <img src="{{ asset('images/biology.png') }}" class="card-img-top" alt="kepo" style="height: 30vh; object-fit: cover;">
-                                        <div class="card-body">
-                                            <h5 class="card-title custom-text" >The Hike To Home</h5>
-                                            <p class="card-text" style="color: rgb(110, 110, 110);">Novel</p>
-                                            <div class="row">
-                                                <div class="d-flex ">
-                                                <img src="{{ asset('images/star1.png') }}" alt="bintanh" style="height: 1.3pc; width: 1.3pc">
-                                                <p style="font-size: 14px; color: rgb(110, 110, 110); margin-left: 10px">4.5</p>
-                                                <button class="btn btn-secondary " style="font-size: 12px; height: 30px; margin-left: 40px"> online </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3 custom-col" style="margin-top: 20px">
-                                    <div class="card shadow">
-                                        <img src="{{ asset('images/buku1.png') }}" class="card-img-top" alt="kepo" style="height: 30vh; object-fit: cover;">
-                                        <div class="card-body">
-                                            <h5 class="card-title custom-text" >The Hike To Home</h5>
-                                            <p class="card-text" style="color: rgb(110, 110, 110);">Novel</p>
-                                            <div class="row">
-                                                <div class="d-flex ">
-                                                <img src="{{ asset('images/star1.png') }}" alt="bintanh" style="height: 1.3pc; width: 1.3pc">
-                                                <p style="font-size: 14px; color: rgb(110, 110, 110); margin-left: 10px">4.5</p>
-                                                <button class="btn btn-secondary " style="font-size: 12px; height: 30px; margin-left: 40px"> online </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3 custom-col" style="margin-top: 20px">
-                                    <div class="card shadow">
-                                        <img src="{{ asset('images/buku1.png') }}" class="card-img-top" alt="kepo" style="height: 30vh; object-fit: cover;">
-                                        <div class="card-body">
-                                            <h5 class="card-title custom-text" >The Hike To Home</h5>
-                                            <p class="card-text" style="color: rgb(110, 110, 110);">Novel</p>
-                                            <div class="row">
-                                                <div class="d-flex ">
-                                                <img src="{{ asset('images/star1.png') }}" alt="bintanh" style="height: 1.3pc; width: 1.3pc">
-                                                <p style="font-size: 14px; color: rgb(110, 110, 110); margin-left: 10px">4.5</p>
-                                                <button class="btn btn-secondary " style="font-size: 12px; height: 30px; margin-left: 40px"> online </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3 custom-col" style="margin-top: 20px">
-                                    <div class="card shadow">
-                                        <img src="{{ asset('images/buku1.png') }}" class="card-img-top" alt="kepo" style="height: 30vh; object-fit: cover;">
-                                        <div class="card-body">
-                                            <h5 class="card-title custom-text" >The Hike To Home</h5>
-                                            <p class="card-text" style="color: rgb(110, 110, 110);">Novel</p>
-                                            <div class="row">
-                                                <div class="d-flex ">
-                                                <img src="{{ asset('images/star1.png') }}" alt="bintanh" style="height: 1.3pc; width: 1.3pc">
-                                                <p style="font-size: 14px; color: rgb(110, 110, 110); margin-left: 10px">4.5</p>
-                                                <button class="btn btn-secondary " style="font-size: 12px; height: 30px; margin-left: 40px"> online </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                </div>
-                             </div>
 
 
 
@@ -237,29 +178,43 @@
                                                </div>
                                            </div>
                                        </div>
-                                       <div class="col-md-3 custom-col" style="margin-top: 20px">
-                                        <div class="card shadow">
-                                            <img src="{{ asset('images/buku1.png') }}" class="card-img-top" alt="kepo" style="height: 30vh; object-fit: cover;">
-                                            <div class="card-body">
-                                                <h5 class="card-title custom-text" >The Hike To Home</h5>
-                                                <p class="card-text" style="color: rgb(110, 110, 110);">Novel</p>
-                                                <div class="row">
-                                                    <div class="d-flex ">
-                                                    <img src="{{ asset('images/star1.png') }}" alt="bintanh" style="height: 1.3pc; width: 1.3pc">
-                                                    <p style="font-size: 14px; color: rgb(110, 110, 110); margin-left: 10px">4.5</p>
-                                                    <button class="btn btn-secondary " style="font-size: 12px; height: 30px; margin-left: 40px"> online </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
 
                                        </div>
                                     </div>
                             </div>
+                            <div class="tab-content">
+
+                                <div id="All" class="tab-pane fade show ">
+                                    <h2 style="margin-top: 30px">All Books</h2>
+                                    <div class="row">
+                                        @foreach ($books as $item)
+
+                                        <div class="col-md-3 custom-col" style="margin-top: 20px">
+                                            <div class="card shadow">
+                                                <img src="{{ asset('storage/' . $item->image_book) }}" class="card-img-top" alt="kepo" style="height: 30vh; object-fit: cover;">
+                                                <div class="card-body">
+                                                    <h5 class="card-title custom-text" >{{ $item->title }}</h5>
+                                                    <p class="card-text" style="color: rgb(110, 110, 110);">{{ $item->categories->pluck('name')->join(', ') }}</p>
+                                                    <div class="row">
+                                                        <div class="d-flex ">
+                                                            <img src="{{ asset('images/star1.png') }}" alt="bintanh" style="height: 1.3pc; width: 1.3pc">
+                                                            <p style="font-size: 14px; color: rgb(110, 110, 110); margin-left: 10px">4.5</p>
+                                                            <button class="btn btn-secondary " style="font-size: 12px; height: 30px; margin-left: 40px"> online </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @endforeach
+
+
+                                    </div>
+                                </div>
                             </div>
 
-                    </div>
+
+                        </div>
+                        </div>
 
 
 
@@ -267,6 +222,29 @@
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Tambahkan skrip JavaScript untuk mengubah warna latar belakang tautan saat dipilih
+        $(document).ready(function(){
+            $('.animated-button').click(function(){
+                $('.animated-button').css({
+                    'background-color': 'blue',
+                    'color': '', // Reset warna teks semua tautan
+                    'box-shadow': '' // Reset bayangan semua tautan
+                });
+
+                $(this).css({
+                    'background-color': 'blue',
+                    'color': 'white',
+                    'box-shadow': '0 0 0 5px #010a8a'
+                });
+            });
+
+            $('.animated-button[data-target="#All"]').click(function(){
+                $('#All').tab('show');
+            });
+        });
+        </script>
+
 </body>
 </html>

@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('books', function (Blueprint $table) {
             $table->id();
+            $table->string('image_book');
+            $table->string('book_code');
             $table->string('book_code');
             $table->string('title');
             $table->string('author')->default('Unknown'); // Tambahkan default value untuk author
