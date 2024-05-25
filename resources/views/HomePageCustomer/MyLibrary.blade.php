@@ -28,11 +28,11 @@
             </div>
         </nav>
         <div class="body-content">
-            <div class="sidebar d-lg-block collapse" id="navbarTogglerDemo02" style="background-color: rgb(90, 90, 205); ">
-                <a href="/HomePageCustomer" style="color: white"> Discover</a>
-                <a href="/YourLibrary" class="active" style="color: white"> My Library </a>
-                <a href="/Favorite" style="color: white">Favorite</a>
-                <a href="rent" style="color: white"> Log out </a>
+            <div class="sidebar d-lg-block collapse" id="navbarTogglerDemo02" style="background-color: rgb(41, 41, 171);">
+                <a href="/HomePageCustomer" class="sidebar-custom" style="color: white"> Discover </a>
+                <a href="/YourLibrary" class="activeC"  style="color: white"> My Library </a>
+                <a href="/Favorite" class="sidebar-custom" style="color: white">Favorite</a>
+                <a href="/logincustomer" class="sidebar-custom" style="color: white"> Log out </a>
             </div>
             <div class="content">
                 <div class="content bg-white " style=" border-radius: 20px; font-family: Inknut-Bold;">

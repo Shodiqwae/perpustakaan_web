@@ -9,10 +9,11 @@ use App\Http\Controllers\HomePageCustomer;
 use App\Http\Controllers\MylibraryController;
 use App\Http\Controllers\FavoritePageC;
 use App\Http\Controllers\BookspController;
-use APP\Http\Controllers\RegisAController;
+use App\Http\Controllers\RegisAController;
 use App\Http\Controllers\HomeAController;
 use App\Http\Controllers\UsernameAController;
 use App\Http\Controllers\LoginAController;
+
 
 
 /*
@@ -77,5 +78,5 @@ Route::post('/categories', [App\Http\Controllers\CategorypController::class, 'st
 Route::get('loginA', [LoginAController::class, 'LoginA'])->name('loginA');
 Route::get('homeA', [HomeAController::class, 'HomeA'])->name('homeA');
 Route::get('regis', [RegisAController::class, 'RegisA'])->name('regis');
-Route::get('username', [UsernameAController::class, 'Username'])->name('username');
+Route::get('username', [UsernameAController::class, 'UsernameA'])->name('username');
 

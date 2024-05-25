@@ -33,10 +33,10 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+             {{-- search --}}
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                     <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    </form>
+                        <input id="searchInput" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">                    </form>
                 </div>
             </div>
         </nav>
@@ -45,7 +45,7 @@
                 <a href="/HomePageCustomer" class="activeC" style="color: white"> Discover </a>
                 <a href="/YourLibrary" class="sidebar-custom" style="color: white"> My Library </a>
                 <a href="/Favorite" class="sidebar-custom" style="color: white">Favorite</a>
-                <a href="login" class="sidebar-custom" style="color: white"> Log out </a>
+                <a href="/logincustomer" class="sidebar-custom" style="color: white"> Log out </a>
             </div>
             <div class="content">
                 <div class="content bg-white scrollable-content nav-pills justify-content-left" style="border-radius: 20px; font-family: Inknut-Bold; height: 100vh">
@@ -189,7 +189,24 @@
         }
     }
 });
+    </script>
+    <script>
+        $(document).ready(function(){
+            // Function to handle search input
+            $('#searchInput').on('input', function(){
+                var searchText = $(this).val().toLowerCase(); // Get input value and convert to lowercase
 
+                // Filter book cards based on search text
+                $('.book-card').each(function(){
+                    var bookTitle = $(this).find('.card-title').text().toLowerCase(); // Get book title and convert to lowercase
+                    if(bookTitle.includes(searchText)){ // Check if book title contains search text
+                        $(this).show(); // Show book card if it matches the search text
+                    } else {
+                        $(this).hide(); // Hide book card if it doesn't match the search text
+                    }
+                });
+            });
+        });
     </script>
 </body>
 </html>
