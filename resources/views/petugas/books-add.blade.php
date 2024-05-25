@@ -22,12 +22,12 @@
             </div>
         </nav>
         <div class="body-content">
-            <div class="sidebar d-lg-block" id="navbarTogglerDemo02">
-                <a href="{{ route('home') }}"> Dashboard</a>
+            <div class="sidebar d-lg-block" id="navbarTogglerDemo02"  style="background-color: rgb(41, 41, 171); color: white">
+                <a href="{{ route('home') }}" class="sidebar-custom"> Dashboard</a>
                 <a href="{{ route('books') }}" class="active"> Books </a>
-                <a href="{{ route('category') }}">Category</a>
-                <a href="{{ route('rent') }}"> Rent Log </a>
-                <a href="{{ route('login') }}"> Log out </a>
+                <a href="{{ route('category') }}" class="sidebar-custom">Category</a>
+                <a href="{{ route('rent') }}" class="sidebar-custom"> Rent Log </a>
+                <a href="{{ route('login') }}" class="sidebar-custom"> Log out </a>
             </div>
             <div class="content">
                 <h2>Add New Book</h2>

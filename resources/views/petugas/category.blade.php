@@ -21,13 +21,12 @@
             </div>
           </nav>
           <div class="body-content">
-            <div class="sidebar d-lg-block" id="navbarTogglerDemo02">
-                <a href="home"> Dashboard</a>
-                <a href="books"> Books </a>
-                <a href="category" class="active">Category</a>
-                <a href="rent" > Rent Log </a>
-                <a href="login"> Log out  </a>
-                <a href=""></a>
+            <div class="sidebar d-lg-block collapse" id="navbarTogglerDemo02" style="background-color: rgb(41, 41, 171); color: white">
+                <a href="home"  class="sidebar-custom"> Dashboard</a>
+                <a href="books" class="sidebar-custom"> Books </a>
+                <a href="category" class="active" >Category</a>
+                <a href="rent" class="sidebar-custom"> Rent Log </a>
+                <a href="login" class="sidebar-custom"> Log out </a>
             </div>
             <div class="content">
               <h2>Category List</h2>
