@@ -28,12 +28,12 @@
             </div>
         </nav>
         <div class="body-content">
-            <div class="sidebar d-lg-block collapse" id="navbarTogglerDemo02">
-                <a href="home" class="active"> Dashboard</a>
-                <a href="books"> Books </a>
-                <a href="category">Category</a>
-                <a href="rent"> Rent Log </a>
-                <a href="login"> Log out </a>
+            <div class="sidebar d-lg-block collapse" id="navbarTogglerDemo02" style="background-color: rgb(41, 41, 171); color: white">
+                <a href="home"  class="active" > Dashboard</a>
+                <a href="books" class="sidebar-custom"> Books </a>
+                <a href="category" class="sidebar-custom">Category</a>
+                <a href="rent" class="sidebar-custom"> Rent Log </a>
+                <a href="login" class="sidebar-custom"> Log out </a>
             </div>
             <div class="content">
                 <h2>Welcome, StarBook</h2>
@@ -43,7 +43,7 @@
                             <i class="bi bi-journal-bookmark me-3"></i>
                             <div class="info">
                                 <span class="card-desc">Books</span><br>
-                                <span class="card-count">{{ $book_count }}</span>
+                                <span class="card-count"></span>
                             </div>
                         </div>
                     </div>
@@ -52,7 +52,7 @@
                             <i class="bi bi-list-stars"></i>
                             <div class="info">
                                 <span class="card-desc">Category</span><br>
-                                <span class="card-count">{{ $category_count }}</span>
+                                <span class="card-count"></span>
                             </div>
                         </div>
                     </div>

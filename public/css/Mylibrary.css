@@ -37,15 +37,44 @@
     font-weight: bold;
 }
 
-.sidebar a:hover {
-    background: rgb(6, 59, 216);
+.sidebar-custom {
+    padding: 15px 25px;
+    border: unset;
+    z-index: 1;
+    border-right: solid 10px rgb(41, 41, 171);
+    background-color: rgb(41, 41, 171);
+    position: relative;
+    font-weight: 1000;
+    font-size: 17px;
+    transition: all 250ms;
+    overflow: hidden;
 }
 
-.active {
-    background: rgb(63, 98, 201);
-    border-right: solid 10px rgb(63, 98, 201);
+.sidebar-custom::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    background-color: rgba(10, 24, 66, 0.613);
+    z-index: -1;
+    transition: all 250ms;
 }
 
+.sidebar-custom:hover {
+    color: #e8e8e8;
+    border-right: solid 10px rgba(10, 24, 66, 0.613);
+}
+
+.sidebar-custom:hover::before {
+    width: 100%;
+}
+
+.activeC {
+    background-color: rgb(5, 21, 67);
+    border-right: solid 10px rgb(5, 21, 67);
+}
 @media (max-width: 991.98px) {
     .body-content {
         flex-direction: column;

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Add Category</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style1.css') }}">
 </head>
 <body>
     <div class="main">
@@ -21,13 +21,12 @@
             </div>
         </nav>
         <div class="body-content">
-            <div class="sidebar d-lg-block" id="navbarTogglerDemo02">
-                    <a href="home"> Dashboard</a>
-                    <a href="books"> Books </a>
-                    <a href="category" class="active">Category</a>
-                    <a href="rent"> Rent Log </a>
-                    <a href="login"> Log out  </a>
-                    <a href=""></a>
+            <div class="sidebar d-lg-block" id="navbarTogglerDemo02" style="background-color: rgb(41, 41, 171); color: white">
+                    <a href="home" class="sidebar-custom"> Dashboard</a>
+                    <a href="books" class="sidebar-custom"> Books </a>
+                    <a href="category" class="active" class="sidebar-custom">Category</a>
+                    <a href="rent" class="sidebar-custom"> Rent Log </a>
+                    <a href="login" class="sidebar-custom"> Log out  </a>
             </div>
             <div class="content">
               <h2>Add New Category</h2>
@@ -36,7 +35,7 @@
                 <a href="category" class="btn btn-secondary me-5">Back</a>
               </div>
 
-              <div class="mt-5 w-50">
+              <div class="mt-5 w-25">
 
                 @if ($errors->any())
                 <div class="alert alert-danger">
@@ -55,7 +54,7 @@
                         <label for="name" class="from-label">Category Name</label>
                         <input type="text" name="name" id="name" class="form-control" placeholder="Enter category name">
                     </div>
-                    <div class="mt-3">
+                    <div class="mt-5">
                         <button class="btn btn-success" type="submit">Save</button>
                     </div>
                 </form>

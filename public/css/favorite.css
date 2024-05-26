@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'Inknut-Bold';
+    src: url('../fonts/InknutAntiqua-Bold.ttf') format('truetype');
+}
+
 .main {
     display: flex;
     flex-direction: column;
@@ -23,8 +28,9 @@
     padding: 30px;
     flex-grow: 1;
 }
+
 .sidebar a {
-    color: #f7f7f7;
+    color: #000000;
     text-decoration: none;
     display: block;
     padding: 13px;
@@ -65,11 +71,10 @@
     width: 100%;
 }
 
-.active {
+.activeC {
     background-color: rgb(5, 21, 67);
     border-right: solid 10px rgb(5, 21, 67);
 }
-
 @media (max-width: 991.98px) {
     .body-content {
         flex-direction: column;
@@ -128,27 +133,24 @@
     margin-left: 110px;
 }
 
+.custom-col {
+    max-width: 14pc; /* Lebar maksimum kolom */
+     /* Mengatur margin otomatis agar kolom berada di tengah */
+  }
 
-.flora {
-    margin-right: 50px;
+.custom-text{
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 15px;
 }
 
 
-.text-light-1 {
-    color: #000000;
-    font-weight: bold;
-}
 
-.btn-link-e {
-    background-color: rgb(76, 191, 108);
-    color: #ffffff;
-    text-decoration: none;
-    margin-right: 10px;
-}
+.favorite-custom{
+    width: 40px;
+    height: 40px;
 
-.btn-link-d {
-    background-color: rgb(253, 58, 84);
-    color: #ffffff;
-    text-decoration: none;
-    margin-right: 10px;
+    float: right;
 }

@@ -8,6 +8,6 @@ class HomepController extends Controller
 {
     public function homePage()
     {
-        return view('petugas.home');
+        return view('petugas.homeP');
     }
 }
