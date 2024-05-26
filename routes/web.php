@@ -71,3 +71,9 @@ Route::get('homeA', [HomeAController::class, 'HomeA'])->name('homeA');
 Route::get('regis', [RegisAController::class, 'RegisA'])->name('regis');
 Route::get('username', [UsernameAController::class, 'Username'])->name('username');
 
+//petugs admin
+Route::get('petugasA', [PetugasAController::class, 'PetugasA'])->name('petugasA');
+Route::get('petugasA-add', [PetugasAController::class, 'AddP'])->name('petugasA-add');
+Route::get('userA', [UserAController::class, 'UserA'])->name('userA');
+
+

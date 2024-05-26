@@ -35,20 +35,24 @@
         </nav>
         <div class="body-content">
             <div class="sidebar d-lg-block collapse" id="navbarTogglerDemo02">
-                <a href="homeA" class="active"> Dashboard</a>
-                <a href="petugasA">Petugas</a>
+                <a href="homeA"> Dashboard</a>
+                <a href="petugasA" class="active">Petugas</a>
                 <a href="userA">User</a>
                 <a href="loginA"> Log out </a>
             </div>
             <div class="content">
-                <h2>Category List</h2>
+                <h2>User Petugas</h2>
+
+                <div class="mt-5 d-flex justify-content-end">
+                    <a href="{{ route('petugasA-add') }}"  class="btn btn-secondary me-5">Add Data</a>
+                </div>
 
                 <table class="table my-5">
                   <thead>
                       <tr>
                           <th>No.</th>
                           <th>Username</th>
-                          <th>No.Handphonen</th>
+                          <th>Password</th>
                       </tr>
               </div>
         </div>

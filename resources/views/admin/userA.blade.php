@@ -35,20 +35,20 @@
         </nav>
         <div class="body-content">
             <div class="sidebar d-lg-block collapse" id="navbarTogglerDemo02">
-                <a href="homeA" class="active"> Dashboard</a>
+                <a href="homeA" > Dashboard</a>
                 <a href="petugasA">Petugas</a>
-                <a href="userA">User</a>
+                <a href="userA" class="active">User</a>
                 <a href="loginA"> Log out </a>
             </div>
             <div class="content">
-                <h2>Category List</h2>
+                <h2>Users List</h2>
 
                 <table class="table my-5">
                   <thead>
                       <tr>
                           <th>No.</th>
                           <th>Username</th>
-                          <th>No.Handphonen</th>
+                          <th>Email</th>
                       </tr>
               </div>
         </div>
