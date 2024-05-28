@@ -1,6 +1,8 @@
 <?php
 
+
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RegisAController;
 use App\Http\Controllers\loginController;
 use App\Http\Controllers\forgotController;
 use App\Http\Controllers\SetPasswordController;
@@ -9,11 +11,12 @@ use App\Http\Controllers\HomePageCustomer;
 use App\Http\Controllers\MylibraryController;
 use App\Http\Controllers\FavoritePageC;
 use App\Http\Controllers\BookspController;
-use App\Http\Controllers\RegisAController;
 use App\Http\Controllers\HomeAController;
 use App\Http\Controllers\UsernameAController;
 use App\Http\Controllers\LoginAController;
-
+use App\Http\Controllers\PetugasAController;
+use App\Http\Controllers\UserAControllers;
+use App\Http\Controllers\AdminController;
 
 
 /*
@@ -77,12 +80,18 @@ Route::post('/categories', [App\Http\Controllers\CategorypController::class, 'st
 // Route Admin
 Route::get('loginA', [LoginAController::class, 'LoginA'])->name('loginA');
 Route::get('homeA', [HomeAController::class, 'HomeA'])->name('homeA');
-Route::get('regis', [RegisAController::class, 'RegisA'])->name('regis');
-Route::get('username', [UsernameAController::class, 'UsernameA'])->name('username');
+Route::get('regisA', [RegisAController::class, 'showRegistrationForm'])->name('showRegistrationForm');
+Route::post('regisA', [RegisAController::class, 'register'])->name('regisA.register.submit');
+Route::post('check-duplicate', [RegisAController::class, 'checkDuplicate'])->name('checkDuplicate');
+
 
 //petugs admin
 Route::get('petugasA', [PetugasAController::class, 'PetugasA'])->name('petugasA');
 Route::get('petugasA-add', [PetugasAController::class, 'AddP'])->name('petugasA-add');
-Route::get('userA', [UserAController::class, 'UserA'])->name('userA');
+Route::get('userA', [UserAControllers::class, 'UserA'])->name('userA');
+// Route untuk menampilkan halaman pendaftaran admin
+
+// Route untuk menangani proses pendaftaran admin
+
 
 

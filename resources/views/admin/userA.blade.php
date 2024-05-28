@@ -7,7 +7,7 @@
     <title>Home</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style1.css') }}">
 </head>
 <body>
     <div class="main">
@@ -34,11 +34,11 @@
             </div>
         </nav>
         <div class="body-content">
-            <div class="sidebar d-lg-block collapse" id="navbarTogglerDemo02">
-                <a href="homeA" > Dashboard</a>
-                <a href="petugasA">Petugas</a>
+            <div class="sidebar d-lg-block collapse" id="navbarTogglerDemo02"  style="background-color: rgb(41, 41, 171);">
+                <a href="homeA" class="sidebar-custom"> Dashboard</a>
+                <a href="petugasA" class="sidebar-custom">Petugas</a>
                 <a href="userA" class="active">User</a>
-                <a href="loginA"> Log out </a>
+                <a href="loginA" class="sidebar-custom"> Log out </a>
             </div>
             <div class="content">
                 <h2>Users List</h2>

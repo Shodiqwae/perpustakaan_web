@@ -122,14 +122,15 @@
 <body>
     <div class="container">
         <div class="login">
-            <form action="">
+            <form action="{{ route('admin.register.submit') }}" method="POST">
+                @csrf
                 <h1>Username</h1>
                 <hr>
                 <p>Enter Your Username</p>
                 <label for="username">Username</label>
-                <input type="text" id="username" placeholder="Username">
+                <input type="text" id="username" name="username" placeholder="Username" required>
                 <div class="button-wrapper">
-                    <a href="{{ route('homeA') }}" class="button">Done</a>
+                    <button type="submit" class="button" onclick="window.location.href='/home'">Done</button>
                 </div>
             </form>
         </div>

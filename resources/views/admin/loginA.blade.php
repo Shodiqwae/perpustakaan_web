@@ -137,7 +137,7 @@
                     <a href="{{ route('homeA') }}" class="button">Login</a>
                 </div>
                 <div class="button-wrapper" style="margin-top: 10px;">
-                    <a href="{{ route('regis') }}" class="button">Register</a>
+                    <a href="regisA" class="button">Register</a>
                 </div>
             </form>
         </div>
