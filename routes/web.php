@@ -87,3 +87,5 @@ Route::get('petugasA-add', [PetugasAController::class, 'AddP'])->name('petugasA-
 Route::get('userA', [UserAController::class, 'UserA'])->name('userA');
 
 
+
+

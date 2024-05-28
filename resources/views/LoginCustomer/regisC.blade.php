@@ -117,9 +117,29 @@
         .forgot-password a:hover {
             text-decoration: underline;
         }
+
+        .back {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        .back a {
+            color: #000000;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .back a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
+    <div class="container">
+        <div class="back">
+            <a href="#">Back</a>
+        </div>
     <div class="container">
         <div class="login">
             <form action="">
