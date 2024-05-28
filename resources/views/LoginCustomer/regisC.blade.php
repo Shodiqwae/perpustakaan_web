@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Username</title>
+    <title>Register Customer</title>
     <style>
         * {
             margin: 0;
@@ -123,13 +123,17 @@
     <div class="container">
         <div class="login">
             <form action="">
-                <h1>Username</h1>
+                <h1>Rigester</h1>
                 <hr>
-                <p>Enter Your Username</p>
+                <p>Complete The Data Below</p>
                 <label for="username">Username</label>
-                <input type="text" id="username" placeholder="Username">
+                <input type="text" id="email" placeholder="Email">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Password">
+                <label for="password">Confirm Password</label>
+                <input type="password" id="confirm password" placeholder="Confir Password">
                 <div class="button-wrapper">
-                    <a href="{{ route('homeA') }}" class="button">Done</a>
+                    <a href="{{ route('HomePageC') }}" class="button">Done</a>
                 </div>
             </form>
         </div>

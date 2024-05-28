@@ -10,4 +10,9 @@ class RegisAController extends Controller
     {
         return view('admin.regisA');
     }
+
+    public function RegisC()
+    {
+        return view('LoginCustomer.regisC');
+    }
 }

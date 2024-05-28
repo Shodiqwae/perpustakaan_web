@@ -133,7 +133,7 @@
                 <label for="password">Confirm Password</label>
                 <input type="password" id="confirm password" placeholder="Confir Password">
                 <div class="button-wrapper">
-                    <a href="{{ route('username') }}" class="button">Done</a>
+                    <a href="{{ route('homeA') }}" class="button">Done</a>
                 </div>
             </form>
         </div>

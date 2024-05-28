@@ -31,6 +31,7 @@ use App\Http\Controllers\LoginAController;
 Route::get('/logincustomer', [loginController::class, 'LoginPage']);
 Route::get('/forgotpasswordcustomer', [forgotController::class, 'forgotPage']);
 Route::get('/SetPasswordcustomer', [SetPasswordController::class, 'SetPasswordPage']);
+Route::get('/regisC', [RegisAController::class, 'RegisC'])->name('/regisC');
 
 
 /* HomePage Customer */
