@@ -34,54 +34,39 @@
             </div>
         </nav>
         <div class="body-content">
-            <div class="sidebar d-lg-block collapse" id="navbarTogglerDemo02" style="background-color: rgb(41, 41, 171);">
-                <a href="dashboard" class="active"> Dashboard</a>
-                <a href="petugasA"  class="sidebar-custom">Petugas</a>
-                <a href="userA"  class="sidebar-custom">User</a>
-                <a href="#" class="sidebar-custom" id="logout-link"> Log out </a>
+            <div class="sidebar d-lg-block collapse" id="navbarTogglerDemo02"  style="background-color: rgb(41, 41, 171);">
+                <a href="{{ route('admin.homeA') }}" class="sidebar-custom"> Dashboard</a>
+                <a href="{{ route('petugasA.index') }}" class="sidebar-custom">Petugas</a>
+                <a href="{{ route('userA.index') }}" class="active">User</a>
+                <a href="admin/loginA" class="sidebar-custom"> Log out </a>
             </div>
             <div class="content">
-                <h2>Category List</h2>
+                <h2>Edit User</h2>
 
-                <table class="table my-5">
-                  <thead>
-                      <tr>
-                          <th>No.</th>
-                          <th>Username</th>
-                          <th>No.Handphonen</th>
-                      </tr>
+                <form action="{{ route('userA.update', ['id' => $user->id]) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+
+                    <div class="form-group mb-3">
+                        <label for="name" class="form-label">Username</label>
+                        <input type="text" name="name" id="name" class="form-control" value="{{ $user->name }}" placeholder="Enter Username" required>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" name="email" id="email" class="form-control" value="{{ $user->email }}" placeholder="Enter Email" required>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="password" class="form-label">New Password</label>
+                        <input type="password" name="password" id="password" class="form-control" placeholder="Enter New Password">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Update User</button>
+                </form>
               </div>
         </div>
     </div>
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
- <script>
-    // Function to handle logout
-    function handleLogout(event) {
-        event.preventDefault(); // Prevent default action (following the link)
-
-        // Create a form element
-        var form = document.createElement('form');
-        form.method = 'POST'; // Set method to POST
-        form.action = '{{ route("logout") }}'; // Set form action to logout route
-
-        // Add CSRF token input field
-        var csrfTokenField = document.createElement('input');
-        csrfTokenField.setAttribute('type', 'hidden');
-        csrfTokenField.setAttribute('name', '_token');
-        csrfTokenField.setAttribute('value', '{{ csrf_token() }}');
-        form.appendChild(csrfTokenField);
-
-        // Append form to document body
-        document.body.appendChild(form);
-
-        // Submit the form
-        form.submit();
-    }
-
-    // Add event listener to the logout link
-    document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('logout-link').addEventListener('click', handleLogout);
-    });
-</script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 </body>
 </html>

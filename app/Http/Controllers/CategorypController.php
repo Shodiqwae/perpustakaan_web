@@ -29,7 +29,7 @@ class CategorypController extends Controller
         $category->slug = Str::slug($category->name);
         $category->save();
 
-        return redirect()->route('categories.index')->with('status', 'Category added successfully.');
+        return redirect()->route('petugas.categories.index')->with('status', 'Category added successfully.');
     }
 
     public function edit($slug)
@@ -50,7 +50,7 @@ class CategorypController extends Controller
         $category->slug = Str::slug($category->name);
         $category->save();
 
-        return redirect()->route('category')->with('success', 'Category updated successfully.');
+        return redirect()->route('petugas.category')->with('success', 'Category updated successfully.');
     }
 
     public function destroy($slug)
@@ -58,7 +58,7 @@ class CategorypController extends Controller
         $category = Category::where('slug', $slug)->firstOrFail();
         $category->delete();
 
-        return redirect()->route('category')->with('status', 'Category deleted successfully.');
+        return redirect()->route('petugas.category')->with('status', 'Category deleted successfully.');
     }
 
     public function restore($id)
@@ -66,7 +66,7 @@ class CategorypController extends Controller
         $category = Category::withTrashed()->findOrFail($id);
         $category->restore();
 
-        return redirect()->route('category-deleted')->with('status', 'Category restored successfully.');
+        return redirect()->route('petugas.category-deleted')->with('status', 'Category restored successfully.');
     }
 
     public function deleted()

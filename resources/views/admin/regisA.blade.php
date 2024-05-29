@@ -37,7 +37,8 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background: #ffffff;
+            background: #334597a3;
+            color: white
         }
 
         .container {
@@ -130,7 +131,7 @@
         .forgot-password a {
             color: #000000;
             text-decoration: none;
-            font-size: 14px;
+            font-size: 15px;
         }
 
         .forgot-password a:hover {
@@ -141,11 +142,10 @@
 <body>
     <div class="container">
         <div class="login">
-            <form id="registration-form" action="{{ route('regisA.register.submit') }}" method="POST">
+            <form id="registration-form" action="{{ route('register.admin.post') }}" method="POST">
                 @csrf
                 <h1>Register</h1>
                 <hr>
-                <p>Complete The Data Below</p>
                 @if ($errors->any())
                 <div class="notification">
                     <div class="alert alert-danger">
@@ -159,13 +159,16 @@
             @endif
 
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Email" required>
+                <input type="name" id="email" name="email" placeholder="Email" required>
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" placeholder="Password" required>
                 <label for="password_confirmation">Confirm Password</label>
                 <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Confirm Password" required>
                 <label for="name">Username</label>
-                <input type="text" id="name" name="name" placeholder="Username" required>
+                <input type="name" id="name" name="name" placeholder="Username" required>
+                <div class="forgot-password">
+                    <a href="loginA" style="color: white">Login Admin?</a>
+                </div>
                 <div class="button-wrapper">
                     <button type="submit" class="button">Register as Admin</button>
                 </div>

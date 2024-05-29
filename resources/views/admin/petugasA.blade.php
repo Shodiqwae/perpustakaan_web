@@ -35,41 +35,76 @@
         </nav>
         <div class="body-content">
             <div class="sidebar d-lg-block collapse" id="navbarTogglerDemo02"  style="background-color: rgb(41, 41, 171);">
-                <a href="homeA"  class="sidebar-custom"> Dashboard</a>
+                <a href="dashboard"  class="sidebar-custom"> Dashboard</a>
                 <a href="petugasA" class="active">Petugas</a>
                 <a href="userA"  class="sidebar-custom">User</a>
-                <a href="loginA"  class="sidebar-custom"> Log out </a>
+                <a href="#" class="sidebar-custom" id="logout-link"> Log out </a>
             </div>
             <div class="content">
                 <h2>User Petugas</h2>
 
                 <div class="mt-5 d-flex justify-content-end">
-                    <a href="{{ route('petugasA-add') }}"  class="btn btn-secondary me-5">Add Data</a>
+                    <a href="{{ route('petugasA.create') }}"  class="btn btn-secondary me-5">Add Data</a>
                 </div>
 
                 <table class="table my-5">
                   <thead>
                       <tr>
                           <th>No.</th>
-                          <th>user_id</th>
+                          <th>Email</th>
                           <th>Username</th>
-                          <th>Password</th>
-                          <th>no_handphone</th>
+                          <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
-                        @foreach ($petugas as $item)
-                            <tr>
-                                <td>{{  $loop->iteration }}</td>
-                                <td>{{ $item->user_id }}</td>
-                                <td>{{ $item->name }}</td>
-                                <td></td>
-                            </tr>
-                        @endforeach
+                        @foreach ($petugas as $key => $item)
+                        <tr>
+                            <td>{{ $key + 1 }}</td>
+                            <td>{{ $item->name }}</td>
+                            <td>{{ $item->email }}</td>
+                            <td>
+                                <a href="{{ route('petugasA.edit', $item->id) }}" class="btn btn-primary">Edit</a>
+                                <form action="{{ route('petugasA.destroy', $item->id) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus?')">Hapus</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
                     </tbody>
               </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script>
+        // Function to handle logout
+        function handleLogout(event) {
+            event.preventDefault(); // Prevent default action (following the link)
+
+            // Create a form element
+            var form = document.createElement('form');
+            form.method = 'POST'; // Set method to POST
+            form.action = '{{ route("logout") }}'; // Set form action to logout route
+
+            // Add CSRF token input field
+            var csrfTokenField = document.createElement('input');
+            csrfTokenField.setAttribute('type', 'hidden');
+            csrfTokenField.setAttribute('name', '_token');
+            csrfTokenField.setAttribute('value', '{{ csrf_token() }}');
+            form.appendChild(csrfTokenField);
+
+            // Append form to document body
+            document.body.appendChild(form);
+
+            // Submit the form
+            form.submit();
+        }
+
+        // Add event listener to the logout link
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('logout-link').addEventListener('click', handleLogout);
+        });
+    </script>
 </body>
 </html>
