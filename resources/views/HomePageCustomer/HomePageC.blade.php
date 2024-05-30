@@ -45,6 +45,7 @@
                 <a href="dashboard" class="activeC" style="color: white"> Discover </a>
                 <a href="YourLibrary" class="sidebar-custom" style="color: white"> My Library </a>
                 <a href="Favorite" class="sidebar-custom" style="color: white">Favorite</a>
+                <a href="rent" class="sidebar-custom" style="color: white">Rent</a>
                 <a href="#" class="sidebar-custom" id="logout-link" style="color: white"> Log out </a>
             </div>
             <div class="content">
@@ -90,13 +91,13 @@
                             <div class="row" style="margin-top: 30px">
                                 <div class="container" id="recommended-section">
                                     <div class="row">
-                                        <h2>Recommended</h2>
+                                        {{-- <h2>Recommended</h2> --}}
                                         <!-- Card Template for Recommended Books -->
-                                        <div class="col-md-3 custom-col" style="margin-top: 20px">
+                                        {{-- <div class="col-md-3 custom-col" style="margin-top: 20px">
                                             <div class="card shadow">
                                                 <img src="{{ asset('images/buku1.png') }}" class="card-img-top" alt="kepo" style="height: 30vh; object-fit: cover;">
                                                 <div class="card-body">
-                                                    <h5 class="card-title custom-text">The Hike To Home</h5>
+                                                    <h5 class="card-title custom-text">{{ $item->title(id=1) }}</h5>
                                                     <p class="card-text" style="color: rgb(110, 110, 110);">Novel</p>
                                                     <div class="row">
                                                         <div class="d-flex">
@@ -107,7 +108,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <!-- Add more cards as needed -->
                                     </div>
                                 </div>
@@ -126,7 +127,12 @@
                                                 <div class="d-flex">
                                                     <img src="{{ asset('images/star1.png') }}" alt="bintanh" style="height: 1.3pc; width: 1.3pc">
                                                     <p style="font-size: 14px; color: rgb(110, 110, 110); margin-left: 10px">4.5</p>
-                                                    <button class="btn btn-secondary" style="font-size: 12px; height: 30px; margin-left: 40px"> online </button>
+
+                                                    <form action="{{ route('bookloans.store') }}" method="POST" style="margin-left: 40px;">
+                                                        @csrf
+                                                        <input type="hidden" name="book_id" value="{{ $item->id }}">
+                                                        <button type="submit" class="btn btn-secondary" style="font-size: 12px; height: 30px;">online</button>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
@@ -134,6 +140,7 @@
                                 </div>
                                 @endforeach
                             </div>
+
                         </div>
                         <!-- Add more tab panes for other categories if needed -->
                     </div>
@@ -239,5 +246,23 @@
             document.getElementById('logout-link').addEventListener('click', handleLogout);
         });
     </script>
+    <<script>
+        $('.online-btn').click(function () {
+            var bookId = $(this).data('book-id');
+            $.ajax({
+                type: "POST",
+                url: "{{ route('peminjam.rent') }}",
+                data: {
+                    book_id: bookId,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function (response) {
+                    alert(response.success);
+                    location.reload(); // Refresh halaman setelah berhasil meminjam buku
+                }
+            });
+        });
+    </script>
+
 </body>
 </html>

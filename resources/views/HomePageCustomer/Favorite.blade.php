@@ -32,6 +32,7 @@
                 <a href="dashboard"  class="sidebar-custom" style="color: white"> Discover </a>
                 <a href="YourLibrary" class="sidebar-custom"  style="color: white"> My Library </a>
                 <a href="Favorite"  class="activeC" style="color: white">Favorite</a>
+                <a href="rent" class="sidebar-custom" style="color: white">Rent</a>
                 <a href="#" class="sidebar-custom" id="logout-link" style="color: white"> Log out </a>
             </div>
             <div class="content">

@@ -21,16 +21,52 @@
             </div>
           </nav>
           <div class="body-content">
-            <div class="sidebar d-lg-block" id="navbarTogglerDemo02">
-                    <a href="home"> Dashboard</a>
-                    <a href="books"> Books </a>
-                    <a href="category">Category</a>
-                    <a href="rent" class="active"> Rent Log </a>
-                    <a href="login"> Log out  </a>
-                    <a href=""></a>
+            <div class="sidebar d-lg-block collapse" id="navbarTogglerDemo02" style="background-color: rgb(41, 41, 171); color: white">
+                <a href="dashboard" class="sidebar-custom"> Dashboard</a>
+                <a href="books" class="sidebar-custom"> Books </a>
+                <a href="category" class="sidebar-custom">Category</a>
+                <a href="rent" class="active"> Rent Log </a>
+                <a href="#" class="sidebar-custom" id="logout-link"> Log out </a>
             </div>
             <div class="content">
-               <h3>ini halaman buku</h3>
+                <h2>Rent Log</h2>
+                @if(session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                <table class="table my-5">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Book Title</th>
+                            <th>Borrower</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($bookLoans as $bookLoan)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $bookLoan->book->title }}</td>
+                            <td>{{ $bookLoan->user->name }}</td>
+                            <td>{{ $bookLoan->status }}</td>
+                            <td>
+                                @if($bookLoan->status == 'pending')
+                                    <form action="{{ route('bookloans.approve', $bookLoan->id) }}" method="POST">
+                                        @csrf
+                                        @method('PUT')
+                                        <button type="submit" class="btn btn-success btn-sm">Approve</button>
+                                    </form>
+                                @else
+                                    <span class="badge bg-success">Approved</span>
+                                @endif
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

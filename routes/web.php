@@ -20,6 +20,8 @@ use App\Http\Controllers\UserAControllers;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PeminjamanRegisterController;
 use App\Http\Controllers\HomePController;
+use App\Http\Controllers\PeminjamanController;
+use App\Http\Controllers\RentlogpController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,8 +57,6 @@ Route::get('dashboard', [App\Http\Controllers\DashboardController::class, 'dashb
 
 
 
-Route::get('logout', [App\Http\Controllers\LogoutController::class, 'logPage'])->name('logout');
-Route::get('rent', [App\Http\Controllers\RentController::class, 'rentPage'])->name('rent');
 
 //Route Category petugas
 
@@ -96,6 +96,8 @@ Route::middleware(['auth', 'role:administrator'])->group(function () {
 
 // Dashboard Petugas
 Route::middleware(['auth', 'role:petugas'])->group(function () {
+    Route::get('petugas/rent', [RentlogpController::class, 'rentPage'])->name('rent.page');
+    Route::put('petugas/bookloans/{id}/approve', [RentlogpController::class, 'approveLoan'])->name('bookloans.approve');
     Route::get('petugas/books', [App\Http\Controllers\BookspController::class, 'booksPage'])->name('books');
     Route::get('petugas/books/create', [App\Http\Controllers\BookspController::class, 'create'])->name('books.create');
     Route::post('petugas/books', [App\Http\Controllers\BookspController::class, 'store'])->name('books.store');
@@ -123,7 +125,10 @@ Route::middleware(['auth', 'role:petugas'])->group(function () {
 
 // Dashboard Peminjam
 Route::middleware(['auth', 'role:peminjam'])->group(function () {
+    Route::get('peminjam/rent', [PeminjamanController::class, 'index'])->name('peminjam.rent');
+
     Route::get('peminjam/dashboard', [HomePageCustomer::class, 'HomePageCustomer'])->name('peminjam.dashboard');
+    Route::post('peminjam/bookloans', [HomePageCustomer::class, 'store'])->name('bookloans.store');
     Route::get('peminjam/YourLibrary', [MylibraryController::class, 'Mylibrary'])->name('peminjam.Mylibrary');
     Route::get('peminjam/Favorite', [FavoritePageC::class, 'FavoritePage'])->name('peminjam.FavoritePage');
 

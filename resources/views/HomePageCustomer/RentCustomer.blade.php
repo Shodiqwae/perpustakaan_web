@@ -30,32 +30,33 @@
         <div class="body-content">
             <div class="sidebar d-lg-block collapse" id="navbarTogglerDemo02" style="background-color: rgb(41, 41, 171);">
                 <a href="dashboard" class="sidebar-custom" style="color: white"> Discover </a>
-                <a href="YourLibrary" class="activeC"  style="color: white"> My Library </a>
+                <a href="YourLibrary" class="sidebar-custom"  style="color: white"> My Library </a>
                 <a href="Favorite" class="sidebar-custom" style="color: white">Favorite</a>
-                <a href="rent" class="sidebar-custom" style="color: white">Rent</a>
+                <a href="rent" class="activeC" style="color: white">Rent</a>
                 <a href="#" class="sidebar-custom" id="logout-link" style="color: white"> Log out </a>
             </div>
             <div class="content">
-                <div class="content bg-white " style=" border-radius: 20px; font-family: Inknut-Bold;">
-                    <div class="row">
-                        <h2>My Library</h2>
-                    </div>
-
-                    <div class="col-md-3 custom-col" style="margin-top: 20px">
-                        <div class="card shadow">
-                            <img src="{{ asset('images/buku1.png') }}" class="card-img-top" alt="kepo" style="height: 30vh; object-fit: cover;">
-                            <div class="card-body">
-                                <h5 class="card-title custom-text" >The Hike To Home</h5>
-                                <p class="card-text" style="color: rgb(110, 110, 110);">Novel</p>
-                                <div class="row">
-                                    <div class="d-flex">
-                                    <button class="btn btn-secondary " style="font-size: 12px; height: 30px; text-align: right; "> online </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <h2>Rent Log</h2>
+                <table class="table my-5">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Book Title</th>
+                            <th>Borrower</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($bookLoans as $bookLoan)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $bookLoan->book->title }}</td>
+                            <td>{{ $bookLoan->user->name }}</td>
+                            <td>{{ $bookLoan->status }}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
