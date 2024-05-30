@@ -13,6 +13,7 @@ use App\Http\Controllers\RegisAController;
 use App\Http\Controllers\HomeAController;
 use App\Http\Controllers\UsernameAController;
 use App\Http\Controllers\LoginAController;
+use App\Http\Controllers\DetailBookController;
 
 
 
@@ -38,6 +39,7 @@ Route::get('/regisC', [RegisAController::class, 'RegisC'])->name('/regisC');
 Route::get('/HomePageCustomer', [HomePageCustomer::class, 'HomePageCustomer']);
 Route::get('/YourLibrary', [MylibraryController::class, 'Mylibrary']);
 Route::get('/Favorite', [FavoritePageC::class, 'FavoritePage']);
+Route::get('/detailbook', [DetailBookController::class, 'detailbook']);
 
 
 //petugas
