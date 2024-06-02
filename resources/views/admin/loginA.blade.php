@@ -19,6 +19,7 @@
             align-items: center;
             min-height: 100vh;
             background: #ffffff;
+            color: white;
         }
 
         .container {
@@ -122,26 +123,28 @@
 <body>
     <div class="container">
         <div class="login">
-            <form action="">
+            <form action="{{ route('login.post') }}" method="POST">
+                @csrf
                 <h1>Login</h1>
                 <hr>
-                <p>Admin Perpustakaan</p>
-                <label for="username">Username</label>
-                <input type="text" id="username" placeholder="Username">
+                <p>Login Page</p>
+                @if ($errors->any())
+                    <div style="color: red; margin-bottom: 10px;">
+                        {{ $errors->first() }}
+                    </div>
+                @endif
+                <label for="email">Name</label>
+                <input type="email" id="email" name="email" placeholder="email" required>
                 <label for="password">Password</label>
-                <input type="password" id="password" placeholder="Password">
-                <div class="forgot-password">
-                    <a href="#">Forgot Your Password?</a>
-                </div>
+                <input type="password" id="password" name="password" placeholder="Password" required>
                 <div class="button-wrapper">
-                    <a href="{{ route('homeA') }}" class="button">Login</a>
+                    <button type="submit" class="button">Login</button>
                 </div>
                 <div class="button-wrapper" style="margin-top: 10px;">
-                    <a href="{{ route('regis') }}" class="button">Register</a>
+                    <a class="button" href="{{ route('register.peminjam') }}">Register</a>
                 </div>
             </form>
         </div>
         <div class="right"></div>
-    </div>
-</body>
+    </div
 </html>

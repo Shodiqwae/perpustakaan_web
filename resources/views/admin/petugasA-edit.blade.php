@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Add Petugas</title>
+    <title>Edit Petugas</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/style1.css') }}">
@@ -15,7 +15,6 @@
         <nav class="navbar navbar-dark navbar-expand-lg">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">
-                    <!-- Ensure the file path is correct -->
                     <img src="{{ asset('images/2.png') }}" alt="Logo" style="height: 40px; width: auto;">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,13 +35,13 @@
         </nav>
         <div class="body-content">
             <div class="sidebar d-lg-block collapse" id="navbarTogglerDemo02">
-                <a href="adminhomeA">Dashboard</a>
+                <a href="homeA">Dashboard</a>
                 <a href="petugasA" class="active">Petugas</a>
                 <a href="">User</a>
                 <a href="loginA">Log out</a>
             </div>
             <div class="content">
-                <h2>Add Petugas</h2>
+                <h2>Edit Petugas</h2>
 
                 <div class="d-flex justify-content-end mt-3">
                     <a href="{{ route('petugasA.index') }}" class="btn btn-secondary me-5">Back</a>
@@ -50,38 +49,40 @@
 
                 <div class="mt-5 w-50">
                     @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
                     @endif
 
-                    <form action="{{ route('petugasA.store') }}" method="POST">
+                    <form action="{{ route('petugasA.update', $petugas->id) }}" method="POST">
                         @csrf
+                        <!-- Tambahkan input untuk metode PUT -->
+                        @method('PUT')
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
                                     <label for="email" class="form-label">Email</label>
-                                    <input type="email" name="email" id="email" class="form-control" placeholder="Enter Email" required>
+                                    <input type="email" name="email" id="email" class="form-control" value="{{ $petugas->email }}" placeholder="Enter Email" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
                                     <label for="name" class="form-label">Username</label>
-                                    <input type="text" name="name" id="name" class="form-control" placeholder="Enter Username" required>
+                                    <input type="text" name="name" id="name" class="form-control" value="{{ $petugas->name }}" placeholder="Enter Username" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
                                     <label for="password" class="form-label">Password</label>
-                                    <input type="password" name="password" id="password" class="form-control" placeholder="Enter Password" required>
+                                    <input type="password" name="password" id="password" class="form-control" placeholder="Enter New Password">
                                 </div>
                             </div>
                             <div class="form-group mb-3">
-                                <button type="submit" class="btn btn-primary">Save</button>
+                                <button type="submit" class="btn btn-primary">Update</button>
                             </div>
                         </div>
                     </form>

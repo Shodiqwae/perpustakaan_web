@@ -66,7 +66,7 @@
                                 <td>{{ $category->name }}</td>
                                 <td>
                                     <!-- Add restore button -->
-                                    <form action="{{ route('category-restore', $category->id) }}" method="POST" style="display: inline;">
+                                    <form action="{{ route('petugas.category-restore', $category->id) }}" method="POST" style="display: inline;">
                                         @csrf
                                         @method('PUT')
                                         <button type="submit" class="btn btn-link">Restore</button>

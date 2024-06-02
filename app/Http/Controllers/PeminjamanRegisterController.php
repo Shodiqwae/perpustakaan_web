@@ -2,19 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Hash;
+
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
-class RegisAController extends Controller
+
+class PeminjamanRegisterController extends Controller
 {
-    // Menampilkan formulir registrasi admin
+    // Menampilkan formulir registrasi peminjam
     public function showRegistrationForm()
     {
-        return view('admin.regisA');
+        return view('LoginCustomer.regisC');
     }
 
-    // Memproses data registrasi admin
+    // Memproses data registrasi peminjam
     public function register(Request $request)
     {
         // Validasi data input
@@ -24,17 +26,15 @@ class RegisAController extends Controller
             'password' => 'required|string|min:8|confirmed',
         ]);
 
-        // Simpan admin baru ke database
+        // Simpan peminjam baru ke database
         User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => 'administrator', // Atur peran sebagai administrator
+            'role' => 'peminjam', // Atur peran sebagai peminjam
         ]);
 
         // Redirect ke halaman login setelah registrasi selesai
         return redirect()->route('login')->with('success', 'Registration successful. Please login.');
     }
-
 }
-

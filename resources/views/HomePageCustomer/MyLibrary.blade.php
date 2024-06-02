@@ -29,10 +29,10 @@
         </nav>
         <div class="body-content">
             <div class="sidebar d-lg-block collapse" id="navbarTogglerDemo02" style="background-color: rgb(41, 41, 171);">
-                <a href="/HomePageCustomer" class="sidebar-custom" style="color: white"> Discover </a>
-                <a href="/YourLibrary" class="activeC"  style="color: white"> My Library </a>
-                <a href="/Favorite" class="sidebar-custom" style="color: white">Favorite</a>
-                <a href="/logincustomer" class="sidebar-custom" style="color: white"> Log out </a>
+                <a href="dashboard" class="sidebar-custom" style="color: white"> Discover </a>
+                <a href="YourLibrary" class="activeC"  style="color: white"> My Library </a>
+                <a href="Favorite" class="sidebar-custom" style="color: white">Favorite</a>
+                <a href="#" class="sidebar-custom" id="logout-link" style="color: white"> Log out </a>
             </div>
             <div class="content">
                 <div class="content bg-white " style=" border-radius: 20px; font-family: Inknut-Bold;">
@@ -59,5 +59,34 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script>
+        // Function to handle logout
+        function handleLogout(event) {
+            event.preventDefault(); // Prevent default action (following the link)
+
+            // Create a form element
+            var form = document.createElement('form');
+            form.method = 'POST'; // Set method to POST
+            form.action = '{{ route("logout") }}'; // Set form action to logout route
+
+            // Add CSRF token input field
+            var csrfTokenField = document.createElement('input');
+            csrfTokenField.setAttribute('type', 'hidden');
+            csrfTokenField.setAttribute('name', '_token');
+            csrfTokenField.setAttribute('value', '{{ csrf_token() }}');
+            form.appendChild(csrfTokenField);
+
+            // Append form to document body
+            document.body.appendChild(form);
+
+            // Submit the form
+            form.submit();
+        }
+
+        // Add event listener to the logout link
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('logout-link').addEventListener('click', handleLogout);
+        });
+    </script>
 </body>
 </html>

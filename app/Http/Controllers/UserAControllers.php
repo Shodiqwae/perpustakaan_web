@@ -3,25 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User; // Import model User
-use Illuminate\Support\Facades\Hash; // Untuk hashing password
+use App\Models\User;
 
-class PetugasAController extends Controller
+class UserAControllers extends Controller
 {
-    // Menampilkan daftar petugas
+    // Menampilkan daftar user peminjam
     public function index()
     {
-        $petugas = User::where('role', 'petugas')->get();
-        return view('admin.petugasA', compact('petugas'));
+        $users = User::where('role', 'peminjam')->get();
+        return view('admin.userA', compact('users'));
     }
 
-    // Menampilkan form tambah petugas
+    // Menampilkan form tambah user peminjam
     public function create()
     {
-        return view('admin.petugasA-add');
+        return view('admin.userA-addData');
     }
 
-    // Menyimpan data petugas baru
+    // Menyimpan data user peminjam baru
     public function store(Request $request)
     {
         $request->validate([
@@ -33,21 +32,21 @@ class PetugasAController extends Controller
         User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'role' => 'petugas',
+            'password' => bcrypt($request->password),
+            'role' => 'peminjam',
         ]);
 
-        return redirect()->route('petugasA.index')->with('success', 'Petugas added successfully.');
+        return redirect()->route('userA.index')->with('success', 'User added successfully.');
     }
 
-    // Menampilkan form edit petugas
+    // Menampilkan form edit user peminjam
     public function edit($id)
     {
-        $petugas = User::findOrFail($id);
-        return view('admin.petugasA-edit', compact('petugas'));
+        $user = User::findOrFail($id);
+        return view('admin.userA-EditData', compact('user'));
     }
 
-    // Memperbarui data petugas
+    // Memperbarui data user peminjam
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -56,29 +55,28 @@ class PetugasAController extends Controller
             'password' => 'nullable|string|min:8', // Tambahkan validasi untuk password baru
         ]);
 
-        $petugas = User::findOrFail($id);
-        $petugas->update([
+        $user = User::findOrFail($id);
+        $user->update([
             'name' => $request->name,
             'email' => $request->email,
         ]);
 
         // Jika password baru disertakan dalam permintaan, perbarui password
         if ($request->has('password')) {
-            $petugas->update([
+            $user->update([
                 'password' => bcrypt($request->password),
             ]);
         }
 
-        return redirect()->route('petugasA.index')->with('success', 'Petugas updated successfully.');
+        return redirect()->route('userA.index')->with('success', 'User updated successfully.');
     }
 
-
-    // Menghapus data petugas
+    // Menghapus data user peminjam
     public function destroy($id)
     {
-        $petugas = User::findOrFail($id);
-        $petugas->delete();
+        $user = User::findOrFail($id);
+        $user->delete();
 
-        return redirect()->route('petugasA.index')->with('success', 'Petugas deleted successfully.');
+        return redirect()->route('userA.index')->with('success', 'User deleted successfully.');
     }
 }

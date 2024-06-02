@@ -24,7 +24,7 @@
             <div class="sidebar d-lg-block" id="navbarTogglerDemo02"  style="background-color: rgb(41, 41, 171); color: white">
                 <a href="{{ route('home') }}" class="sidebar-custom"> Dashboard</a>
                 <a href="{{ route('books') }}" class="sidebar-custom"> Books </a>
-                <a href="{{ route('category') }}" class="active" >Category</a>
+                <a href="{{ route('petugas.category') }}" class="active" >Category</a>
                 <a href="{{ route('rent') }}" class="sidebar-custom"> Rent Log </a>
                 <a href="{{ route('login') }}" class="sidebar-custom"> Log out </a>
             </div>
@@ -41,7 +41,7 @@
                 </div>
                 @endif
 
-                <form action="{{ route('category-update', ['slug' => $category->slug]) }}" method="post">
+                <form action="{{ route('petugas.category-update', ['slug' => $category->slug]) }}" method="post">
                     @csrf
                     @method('PUT') <!-- Tambahkan metode PUT -->
                     <div class="form-group mb-3">

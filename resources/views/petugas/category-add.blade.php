@@ -48,7 +48,7 @@
                 @endif
 
 
-                <form action="{{ route('categories.store') }}" method="post">
+                <form action="{{ route('petugas.categories.store') }}" method="post">
                     @csrf
                     <div class="form-group mb-3">
                         <label for="name" class="from-label">Category Name</label>

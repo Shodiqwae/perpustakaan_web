@@ -22,11 +22,11 @@
           </nav>
           <div class="body-content">
             <div class="sidebar d-lg-block collapse" id="navbarTogglerDemo02" style="background-color: rgb(41, 41, 171); color: white">
-                <a href="home"  class="sidebar-custom"> Dashboard</a>
+                <a href="dashboard"  class="sidebar-custom"> Dashboard</a>
                 <a href="books" class="sidebar-custom"> Books </a>
                 <a href="category" class="active" >Category</a>
                 <a href="rent" class="sidebar-custom"> Rent Log </a>
-                <a href="login" class="sidebar-custom"> Log out </a>
+                <a href="#" class="sidebar-custom" id="logout-link"> Log out </a>
             </div>
             <div class="content">
               <h2>Category List</h2>
@@ -59,10 +59,10 @@
                             <td>{{ $index + 1 }}</td>
                             <td>{{ $category->name }}</td>
                             <td>
-                                <a class="btn btn-link-e" href="{{ route('category-edit', $category->slug) }}">
+                                <a class="btn btn-link-e" href="{{ route('petugas.category-edit', $category->slug) }}">
                                     Edit
                                 </a>
-                                <form action="{{ route('category-delete', $category->slug) }}" method="POST" style="display: inline;">
+                                <form action="{{ route('petugas.category-delete', $category->slug) }}" method="POST" style="display: inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-link-d">Delete</button>
@@ -76,5 +76,34 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script>
+        // Function to handle logout
+        function handleLogout(event) {
+            event.preventDefault(); // Prevent default action (following the link)
+
+            // Create a form element
+            var form = document.createElement('form');
+            form.method = 'POST'; // Set method to POST
+            form.action = '{{ route("logout") }}'; // Set form action to logout route
+
+            // Add CSRF token input field
+            var csrfTokenField = document.createElement('input');
+            csrfTokenField.setAttribute('type', 'hidden');
+            csrfTokenField.setAttribute('name', '_token');
+            csrfTokenField.setAttribute('value', '{{ csrf_token() }}');
+            form.appendChild(csrfTokenField);
+
+            // Append form to document body
+            document.body.appendChild(form);
+
+            // Submit the form
+            form.submit();
+        }
+
+        // Add event listener to the logout link
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('logout-link').addEventListener('click', handleLogout);
+        });
+    </script>
 </body>
 </html>

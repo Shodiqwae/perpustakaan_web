@@ -6,6 +6,25 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Register Customer</title>
     <style>
+        .notification {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+}
+
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
         * {
             margin: 0;
             padding: 0;
@@ -19,6 +38,7 @@
             align-items: center;
             min-height: 100vh;
             background: #ffffff;
+            color: white
         }
 
         .container {
@@ -137,27 +157,62 @@
 </head>
 <body>
     <div class="container">
-        <div class="back">
-            <a href="#">Back</a>
-        </div>
-    <div class="container">
         <div class="login">
-            <form action="">
-                <h1>Rigester</h1>
+            <form id="registration-form" action="{{ route('register.peminjam.post') }}" method="POST">
+                @csrf
+                <h1>Register</h1>
                 <hr>
-                <p>Complete The Data Below</p>
-                <label for="username">Username</label>
-                <input type="text" id="email" placeholder="Email">
+                @if ($errors->any())
+                <div class="notification">
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            @endif
+
+                <label for="email">Email</label>
+                <input type="name" id="email" name="email" placeholder="Email" required>
                 <label for="password">Password</label>
-                <input type="password" id="password" placeholder="Password">
-                <label for="password">Confirm Password</label>
-                <input type="password" id="confirm password" placeholder="Confir Password">
+                <input type="password" id="password" name="password" placeholder="Password" required>
+                <label for="password_confirmation">Confirm Password</label>
+                <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Confirm Password" required>
+                <label for="name">Username</label>
+                <input type="name" id="name" name="name" placeholder="Username" required>
+                <div class="forgot-password">
+                    <a href="{{ route('login') }}" style="color: white">Login?</a>
+                </div>
                 <div class="button-wrapper">
-                    <a href="{{ route('HomePageC') }}" class="button">Done</a>
+                    <button type="submit" class="button">Register as Peminjam</button>
                 </div>
             </form>
         </div>
         <div class="right"></div>
     </div>
+
+    <script>
+        // Fungsi untuk memeriksa apakah password dan konfirmasi password cocok
+        function validatePassword() {
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("password_confirmation").value;
+
+            // Jika password dan konfirmasi password tidak cocok, tampilkan pesan kesalahan
+            if (password != confirmPassword) {
+                alert("Password and Confirm Password do not match");
+                return false;
+            }
+            return true;
+        }
+
+        // Menambahkan event listener untuk form submit
+        document.getElementById("registration-form").addEventListener("submit", function(event) {
+            if (!validatePassword()) {
+                event.preventDefault(); // Mencegah pengiriman formulir jika password tidak cocok
+            }
+        });
+    </script>
 </body>
 </html>
