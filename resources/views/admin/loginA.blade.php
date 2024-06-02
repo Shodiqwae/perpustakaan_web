@@ -133,7 +133,7 @@
                         {{ $errors->first() }}
                     </div>
                 @endif
-                <label for="email">Name</label>
+                <label for="email">Email</label>
                 <input type="email" id="email" name="email" placeholder="email" required>
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" placeholder="Password" required>

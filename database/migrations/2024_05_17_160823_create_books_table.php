@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('title');
             $table->string('author')->default('Unknown'); // Tambahkan default value untuk author
             $table->string('slug')->default('default-slug'); // Tambahkan default value untuk slug
-            $table->string('status')->default('default_value');
             $table->timestamps();
         });
 

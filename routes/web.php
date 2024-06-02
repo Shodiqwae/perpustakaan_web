@@ -2,6 +2,7 @@
 
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoanController;
 use App\Http\Controllers\AuthLoginController;
 use App\Http\Controllers\RegisAController;
 use App\Http\Controllers\loginController;
@@ -22,6 +23,7 @@ use App\Http\Controllers\PeminjamanRegisterController;
 use App\Http\Controllers\HomePController;
 use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\RentlogpController;
+use App\Http\Controllers\DetailBookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -125,10 +127,11 @@ Route::middleware(['auth', 'role:petugas'])->group(function () {
 
 // Dashboard Peminjam
 Route::middleware(['auth', 'role:peminjam'])->group(function () {
+    Route::get('peminjam/detail', [DetailBookController::class, 'DetailBooks'])->name('peminjam.detail');
     Route::get('peminjam/rent', [PeminjamanController::class, 'index'])->name('peminjam.rent');
 
-    Route::get('peminjam/dashboard', [HomePageCustomer::class, 'HomePageCustomer'])->name('peminjam.dashboard');
-    Route::post('peminjam/bookloans', [HomePageCustomer::class, 'store'])->name('bookloans.store');
+    Route::get('peminjam/dashboard', [HomePageCustomer::class, 'index'])->name('peminjam.home');
+    Route::post('peminjam/borrow', [HomePageCustomer::class, 'store'])->name('borrow.book');
     Route::get('peminjam/YourLibrary', [MylibraryController::class, 'Mylibrary'])->name('peminjam.Mylibrary');
     Route::get('peminjam/Favorite', [FavoritePageC::class, 'FavoritePage'])->name('peminjam.FavoritePage');
 

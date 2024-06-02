@@ -8,18 +8,13 @@ use Illuminate\Support\Str;
 
 class Book extends Model
 {
-    protected $fillable = ['book_code', 'title', 'author', 'slug', 'status','image_book'];
-
-    protected $casts = [
-        'status' => 'string',
-    ];
+    protected $fillable = ['book_code', 'title', 'author', 'slug','image_book'];
 
     public static $rules = [
         'book_code' => 'required|string',
         'title' => 'required|string',
         'author' => 'required|string', // Tambahkan validasi agar author tidak null
         'slug' => 'required|string',
-        'status' => 'required|string',
     ];
 
     /**
@@ -31,5 +26,6 @@ class Book extends Model
     {
         return $this->belongsToMany(Category::class, 'book_category', 'book_id', 'category_id');
     }
+
 }
 

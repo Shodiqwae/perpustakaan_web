@@ -77,10 +77,6 @@
                             <input type="text" name="author" id="author" class="form-control" placeholder="Enter Author Name" required value="{{ old('author', $book->author) }}">
                           </div>
                           <div class="form-group mb-3">
-                            <label for="status" class="form-label">Status</label>
-                            <input type="text" name="status" id="status" class="form-control" placeholder="Enter Status" value="{{ old('status', $book->status) }}">
-                          </div>
-                          <div class="form-group mb-3">
                             <label for="cover" class="form-label">Cover</label>
                             <input type="file" name="image_book" class="form-control">
                             @if ($book->image_book)

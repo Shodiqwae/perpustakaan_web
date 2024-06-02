@@ -48,7 +48,6 @@
                                 <th>Image Book</th>
                                 <th>Code</th>
                                 <th>Title</th>
-                                <th>Status</th>
                                 <th>Author</th>
                                 <th>Action</th>
                             </tr>
@@ -67,7 +66,6 @@
                                     </td>
                                     <td>{{ $item->book_code }}</td>
                                     <td>{{ $item->title }}</td>
-                                    <td>{{ $item->status }}</td>
                                     <td>{{ $item->author }}</td>
                                     <td>
                                         <a href="{{ route('books-edit', ['id' => $item->id]) }}" class="btn btn-link-e">Edit</a>
