@@ -21,6 +21,15 @@
         color: #ffffff;
         background-color: blue; /* Warna latar belakang saat tautan aktif */
     }
+
+    .flora {
+        margin-right: 50px;
+    }
+
+    .text-light-1 {
+        color: #000000;
+        font-weight: bold;
+    }
     </style>
 </head>
 <body>
@@ -37,6 +46,13 @@
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                     <form class="d-flex" role="search">
                         <input id="searchInput" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">                    </form>
+                </div>
+                {{-- profile --}}
+                <div class="flora d-flex align-items-center">
+                    <div class="rounded-circle overflow-hidden me-2" style="width: 35px; height: 35px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#profileModal">
+                        <img src="{{ asset('images/p.jpeg') }}" alt="Profile" class="img-fluid">
+                    </div>
+                    <span class="text-light-1">Shadiq Usep</span>
                 </div>
             </div>
         </nav>
@@ -137,6 +153,53 @@
                         </div>
                         <!-- Add more tab panes for other categories if needed -->
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Profile Modal -->
+    <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="profileModalLabel">Profile</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="rounded-circle overflow-hidden me-3" style="width: 70px; height: 70px;">
+                            <img src="{{ asset('images/p.jpeg') }}" alt="Profile" class="img-fluid">
+                        </div>
+                        <div>
+                            <h5 class="mb-0">Shadiq Usep</h5>
+                        </div>
+                    </div>
+                    <h6>History Peminjaman Buku</h6>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Judul Buku</th>
+                                <th>Tanggal Peminjaman</th>
+                                <th>Tanggal Pengembalian</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Table content here -->
+                            <tr>
+                                <td>1</td>
+                                <td>Buku A</td>
+                                <td>2023-01-01</td>
+                                <td>2023-01-15</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Buku B</td>
+                                <td>2023-02-01</td>
+                                <td>2023-02-15</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
