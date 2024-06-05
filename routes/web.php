@@ -15,17 +15,16 @@ use App\Http\Controllers\BookspController;
 use App\Http\Controllers\HomeAController;
 use App\Http\Controllers\UsernameAController;
 use App\Http\Controllers\LoginAController;
-<<<<<<< HEAD
+
 use App\Http\Controllers\DetailBookController;
 
 
-=======
 use App\Http\Controllers\PetugasAController;
 use App\Http\Controllers\UserAControllers;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PeminjamanRegisterController;
 use App\Http\Controllers\HomePController;
->>>>>>> 7789d4d2de048bddd4758a53230e06a2d721feeb
+
 
 /*
 |--------------------------------------------------------------------------
@@ -46,14 +45,12 @@ Route::get('/SetPasswordcustomer', [SetPasswordController::class, 'SetPasswordPa
 
 
 /* HomePage Customer */
-<<<<<<< HEAD
 Route::get('/HomePageCustomer', [HomePageCustomer::class, 'HomePageCustomer']);
 Route::get('/YourLibrary', [MylibraryController::class, 'Mylibrary']);
 Route::get('/Favorite', [FavoritePageC::class, 'FavoritePage']);
 Route::get('/detailbook', [DetailBookController::class, 'detailbook']);
-=======
+Route::get('/edit-profile', [HomePageCustomer::class, 'edit'])->name('profile.edit');
 
->>>>>>> 7789d4d2de048bddd4758a53230e06a2d721feeb
 
 
 //petugas

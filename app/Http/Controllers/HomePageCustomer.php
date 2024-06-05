@@ -11,4 +11,9 @@ class HomePageCustomer extends Controller
         $books = Book::all();
         return view('HomePageCustomer.HomePageC', ['books' => $books]);
     }
+
+    public function edit()
+    {
+        return view('HomePageCustomer.profile.edit'); // Ganti dengan path ke view yang sesuai
+    }
 }

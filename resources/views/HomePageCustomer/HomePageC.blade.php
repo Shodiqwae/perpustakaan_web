@@ -157,7 +157,7 @@
             </div>
         </div>
     </div>
-<<<<<<< HEAD
+
     <!-- Profile Modal -->
     <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -173,6 +173,10 @@
                         </div>
                         <div>
                             <h5 class="mb-0">Shadiq Usep</h5>
+                            <h5 class="mb-0">shadiq.usep@gmail.com</h5>
+                        </div>
+                        <div class="ms-auto">
+                            <button type="button" class="btn btn-primary mb-3" onclick="showEditProfile()">Edit Profile</button>
                         </div>
                     </div>
                     <h6>History Peminjaman Buku</h6>
@@ -201,14 +205,31 @@
                             </tr>
                         </tbody>
                     </table>
+                    <div id="editProfileView" style="display: none;">
+                        <!-- Profile Edit Form -->
+                        <form>
+                            <!-- Form fields here -->
+                            <div class="mb-3">
+                                <label for="profile-picture" class="form-label">Profile Picture</label>
+                                <input type="file" class="form-control" id="profile-picture" name="profile-picture" accept="image/*">
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Username</label>
+                                <input type="email" class="form-control" id="email" name="email">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Save</button>
+                            <button type="button" class="btn btn-secondary" onclick="hideEditProfile()">Cancel</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-=======
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 
->>>>>>> 7789d4d2de048bddd4758a53230e06a2d721feeb
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
@@ -304,6 +325,16 @@
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('logout-link').addEventListener('click', handleLogout);
         });
+
+        function showEditProfile() {
+        document.getElementById('profileView').style.display = 'none';
+        document.getElementById('editProfileView').style.display = 'block';
+        }
+
+        function hideEditProfile() {
+        document.getElementById('profileView').style.display = 'block';
+        document.getElementById('editProfileView').style.display = 'none';
+        }
     </script>
 </body>
 </html>
