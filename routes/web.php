@@ -2,6 +2,7 @@
 
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CrudAdminController;
 use App\Http\Controllers\LoanController;
 use App\Http\Controllers\AuthLoginController;
 use App\Http\Controllers\RegisAController;
@@ -44,7 +45,9 @@ Route::get('/SetPasswordcustomer', [SetPasswordController::class, 'SetPasswordPa
 
 
 /* HomePage Customer */
-
+Route::get('/', function(){
+    return redirect('/login');
+});
 
 
 //petugas
@@ -80,12 +83,24 @@ Route::post('register-peminjam', [PeminjamanRegisterController::class, 'register
 // Dashboard Admin
 Route::middleware(['auth', 'role:administrator'])->group(function () {
     Route::get('admin/dashboard', [HomeAController::class, 'homeA'])->name('admin.homeA');
+
+
+    // Crud Admin
+    Route::get('admin/Crudadmin', [CrudAdminController::class, 'index'])->name('CrudAdmin.index');
+    Route::get('admin/CrudAdmin/create', [CrudAdminController::class, 'create'])->name('CrudAdmin.create');
+    Route::post('admin/CrudAdmin/store', [CrudAdminController::class,'store'])->name('CrudAdmin.store');
+    Route::delete('admin/CrudAdmin/{id}/delete', [CrudAdminController::class, 'destroy'])->name('CrudAdmin.destroy');
+    Route::get('admin/CrudAdmin/{id}/edit', [CrudAdminController::class, 'edit'])->name('CrudAdmin.edit');
+    Route::put('admin/CrudAdmin/{id}/update', [CrudAdminController::class, 'update'])->name('CrudAdmin.update');
+    // Crud Petugas
     Route::get('admin/petugasA', [PetugasAController::class, 'index'])->name('petugasA.index');
     Route::get('admin/petugasA/create', [PetugasAController::class, 'create'])->name('petugasA.create');
     Route::post('admin/petugasA/store', [PetugasAController::class, 'store'])->name('petugasA.store');
     Route::get('admin/petugasA/{id}/edit', [PetugasAController::class, 'edit'])->name('petugasA.edit');
     Route::put('admin/petugasA/{id}/update', [PetugasAController::class, 'update'])->name('petugasA.update');
     Route::delete('admin/petugasA/{id}/delete', [PetugasAController::class, 'destroy'])->name('petugasA.destroy');
+
+    // Crud Users
     Route::get('admin/userA', [UserAControllers::class, 'index'])->name('userA.index');
     Route::get('admin/userA/create', [UserAControllers::class, 'create'])->name('userA.create');
     Route::post('admin/userA/store', [UserAControllers::class, 'store'])->name('userA.store');
@@ -98,6 +113,9 @@ Route::middleware(['auth', 'role:administrator'])->group(function () {
 
 // Dashboard Petugas
 Route::middleware(['auth', 'role:petugas'])->group(function () {
+
+
+
     Route::get('petugas/rent', [RentlogpController::class, 'rentPage'])->name('rent.page');
     Route::put('petugas/bookloans/{id}/approve', [RentlogpController::class, 'approveLoan'])->name('bookloans.approve');
     Route::get('petugas/books', [App\Http\Controllers\BookspController::class, 'booksPage'])->name('books');
@@ -109,6 +127,7 @@ Route::middleware(['auth', 'role:petugas'])->group(function () {
 
 
     Route::get('petugas/dashboard', [HomePController::class, 'homePage'])->name('petugas.homeP');
+    Route::post('petugas/loans/{loan}/approve', [HomePController::class, 'approveLoan'])->name('approve.loan');
 
     Route::get('petugas/category', [App\Http\Controllers\CategorypController::class, 'index'])->name('petugas.category');
     Route::get('petugas/category-add', [App\Http\Controllers\CategorypController::class, 'add'])->name('petugas.category-add');
@@ -127,11 +146,12 @@ Route::middleware(['auth', 'role:petugas'])->group(function () {
 
 // Dashboard Peminjam
 Route::middleware(['auth', 'role:peminjam'])->group(function () {
-    Route::get('peminjam/detail', [DetailBookController::class, 'DetailBooks'])->name('peminjam.detail');
+    Route::get('peminjam/detail/{id}', [DetailBookController::class, 'DetailBook'])->name('peminjam.detail');
+    Route::post('peminjam/borrow', [DetailBookController::class, 'store'])->name('borrow.book');
     Route::get('peminjam/rent', [PeminjamanController::class, 'index'])->name('peminjam.rent');
 
     Route::get('peminjam/dashboard', [HomePageCustomer::class, 'index'])->name('peminjam.home');
-    Route::post('peminjam/borrow', [HomePageCustomer::class, 'store'])->name('borrow.book');
+    Route::post('peminjam/dashboard/{loan}/returned', [HomePageCustomer::class, 'ReturnedLoan'])->name('returned.loan');
     Route::get('peminjam/YourLibrary', [MylibraryController::class, 'Mylibrary'])->name('peminjam.Mylibrary');
     Route::get('peminjam/Favorite', [FavoritePageC::class, 'FavoritePage'])->name('peminjam.FavoritePage');
 
