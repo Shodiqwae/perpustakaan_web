@@ -25,7 +25,7 @@
                 <a href="{{ route('home') }}" class="sidebar-custom"> Dashboard</a>
                 <a href="{{ route('books') }}" class="sidebar-custom"> Books </a>
                 <a href="{{ route('petugas.category') }}" class="active" >Category</a>
-                <a href="{{ route('rent') }}" class="sidebar-custom"> Rent Log </a>
+                <a href="{{ route('rent.page') }}" class="sidebar-custom"> Rent Log </a>
                 <a href="{{ route('login') }}" class="sidebar-custom"> Log out </a>
             </div>
             <div class="content">

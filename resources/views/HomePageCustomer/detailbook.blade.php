@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            background: #334597a3;
             margin: 0;
             padding: 0;
             height: 100vh;
@@ -16,6 +16,36 @@
             justify-content: center;
         }
 
+        .deskripsi{
+            height: 200px;
+            border-radius: 20px;
+        }
+.back {
+  transition: all 0.3s ease-in-out;
+  font-family: "Dosis", sans-serif;
+}
+
+.back {
+  width: 150px;
+  height: 60px;
+  border-radius: 50px;
+  background-image: linear-gradient(135deg, #8197dc 0%,  #a6a6a8 100%);
+  box-shadow: 0 20px 30px -6px rgba(4, 15, 139, 0.5);
+  outline: none;
+  cursor: pointer;
+  border: none;
+  font-size: 24px;
+  color: white;
+}
+
+.back:hover {
+  transform: translateY(3px);
+  box-shadow: none;
+}
+
+.back:active {
+  opacity: 0.5;
+}
         .container {
             width: 90%;
             height: 90%;
@@ -29,17 +59,31 @@
         }
 
         .header {
-            text-align: center;
-            background: linear-gradient(to right, #3a6186, #89253e);
-            color: white;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
+    display: flex;
+    align-items: center;
+    background: linear-gradient(to right, #3a6186, #89253e);
+    color: white;
+    padding: 30px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
 
-        .header h1 {
-            margin: 0;
-        }
+
+
+.header .header-content {
+    text-align: center;
+    margin-right: 120px;
+    flex-grow: 1;
+}
+
+.header .header-content h1 {
+    margin: 0;
+}
+
+.header .header-content p {
+    margin: 0;
+}
+
 
         .main-content {
             display: flex;
@@ -78,7 +122,8 @@
         .buttons {
             margin-top: 20px;
             display: flex;
-            gap: 10px;
+            gap: 20px;
+            margin-left: 10px;
         }
 
         button {
@@ -119,22 +164,36 @@
 <body>
     <div class="container">
         <header class="header">
-            <h1>We Could Be Heroes</h1>
-            <p>Genre: Comedy, Adventure, Fantasy</p>
+            <a href="{{ route('peminjam.home') }}" class="back-button-wrapper">
+                <button class="back">< Back</button>
+            </a>
+            <div class="header-content">
+                <h1>{{ $book->title }}</h1>
+                <p>Category: {{ $book->categories->pluck('name')->join(', ') }}</p>
+            </div>
         </header>
+
         <main class="main-content">
             <div class="book-description">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et eros eu quam scelerisque fermentum eget in nisl. Fusce ac lobortis magna, eget tristique lorem. Duis fringilla nisl eget metus pretium, sit amet accumsan velit tincidunt. Donec ac dolor ultricies, vestibulum nunc non, eleifend orci. In hac habitasse platea dictumst. Integer ac volutpat ipsum. Nam euismod mi in libero suscipit, vel vestibulum felis aliquam. Nullam eu leo justo. Duis eget elit ultricies, fermentum tortor non, gravida sapien. Duis sed neque massa. Integer ultricies, ipsum nec tincidunt suscipit, purus mi venenatis dui, non hendrerit nulla risus vel eros...</p>
+                <div class="deskripsi">
+                    <p style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-weight: bold;font-size: 20px">Description Book :</p>
+                    <p>{{ $book->description }}</p>
+                </div>
                 <div class="buttons">
-                    <button class="read-now">Read now</button>
-                    <button class="add-to-favorites">Add To Favorit</button>
+                    <button class="add-to-favorites" style="background-color: #4f54b3;color:white;font-weight:600">Add To Favorit</button>
+                    <form action="{{ route('borrow.book') }}" method="POST" style="margin-top:19px">
+                        @csrf
+                        <input type="hidden" name="book_id" value="{{ $book->id }}"> <!-- Mengganti $book->id menjadi $item->id -->
+                        <button type="submit" style="background-color: #4f54b3;color:white;font-weight:600">Borrow</button>
+                    </form>
                 </div>
             </div>
             <div class="book-details">
-                <img src="book-cover.jpg" alt="We Could Be Heroes">
+                <img src="{{ asset('storage/' . $book->image_book) }}" alt="{{ $book->title }}" style="height: 90%;width: 40%">
                 <div class="book-info">
-                    <p>By Margaret Finnegan</p>
-                    <p>⭐ 400 Pages</p>
+                    <p style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;font-weight: bold;font-size:18px">By: {{ $book->author }}</p>
+                    <p style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;font-weight: bold;font-size:16px">Stock: {{ $book->stock }}</p>
+
                 </div>
             </div>
         </main>

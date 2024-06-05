@@ -10,8 +10,8 @@ class RentlogpController extends Controller
 {
     public function rentPage()
     {
-        $bookLoans = BookLoan::with('user', 'book')->get();
-        return view('petugas.rent', ['bookLoans' => $bookLoans]);
+
+        return view('petugas.rent',);
     }
 
     public function approveLoan($id)

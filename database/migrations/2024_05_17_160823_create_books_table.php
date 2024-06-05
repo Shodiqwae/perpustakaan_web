@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,13 +14,13 @@ return new class extends Migration
             $table->id();
             $table->string('image_book');
             $table->string('book_code');
-            $table->string('book_code');
             $table->string('title');
-            $table->string('author')->default('Unknown'); // Tambahkan default value untuk author
-            $table->string('slug')->default('default-slug'); // Tambahkan default value untuk slug
+            $table->string('author')->default('Unknown');
+            $table->string('slug')->default('default-slug');
+            $table->text('description')->nullable(); // Menambahkan kolom description
+            $table->integer('stock')->default(0); // Menambahkan kolom stock
             $table->timestamps();
         });
-
     }
 
     /**

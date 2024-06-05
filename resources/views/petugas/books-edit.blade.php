@@ -26,7 +26,7 @@
                 <a href="{{ route('home') }}" class="sidebar-custom"> Dashboard</a>
                 <a href="{{ route('books') }}" class="active"> Books </a>
                 <a href="{{ route('petugas.category') }}" class="sidebar-custom">Category</a>
-                <a href="{{ route('rent') }}" class="sidebar-custom"> Rent Log </a>
+                <a href="{{ route('rent.page') }}" class="sidebar-custom"> Rent Log </a>
                 <a href="{{ route('login') }}" class="sidebar-custom"> Log out </a>
             </div>
             <div class="content">
@@ -76,6 +76,11 @@
                             <label for="author" class="form-label">Author</label>
                             <input type="text" name="author" id="author" class="form-control" placeholder="Enter Author Name" required value="{{ old('author', $book->author) }}">
                           </div>
+                          <div class="form-group mb-3">
+                            <label for="stock" class="form-label">Stock</label>
+                            <input type="number" name="stock" id="stock" class="form-control" placeholder="Enter Stock Quantity" value="{{ $book->stock }}" required>
+                        </div>
+
                           <div class="form-group mb-3">
                             <label for="cover" class="form-label">Cover</label>
                             <input type="file" name="image_book" class="form-control">

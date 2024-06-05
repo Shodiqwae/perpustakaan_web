@@ -5,12 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Login</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif,
+
         }
 
         body {
@@ -19,6 +22,7 @@
             align-items: center;
             min-height: 100vh;
             background: #ffffff;
+            background: #334597a3;
             color: white;
         }
 
@@ -128,11 +132,6 @@
                 <h1>Login</h1>
                 <hr>
                 <p>Login Page</p>
-                @if ($errors->any())
-                    <div style="color: red; margin-bottom: 10px;">
-                        {{ $errors->first() }}
-                    </div>
-                @endif
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" placeholder="email" required>
                 <label for="password">Password</label>
@@ -146,5 +145,15 @@
             </form>
         </div>
         <div class="right"></div>
-    </div
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            @if ($errors->any())
+                alertify.error('{{ $errors->first() }}');
+            @endif
+        });
+    </script>
+    </body>
 </html>

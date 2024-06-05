@@ -14,7 +14,7 @@ class CreateLoansTable extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->date('borrow_date')->nullable();
             $table->date('return_date')->nullable();
-            $table->enum('status', ['pending', 'approved', 'returned'])->default('pending');
+            $table->enum('status', ['pending', 'dipinjam', 'selesai'])->default('pending');
             $table->timestamps();
         });
     }

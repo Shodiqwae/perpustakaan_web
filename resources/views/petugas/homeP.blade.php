@@ -7,6 +7,8 @@
     <title>Home</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
     <link rel="stylesheet" href="{{ asset('css/style1.css') }}">
 </head>
 <body>
@@ -14,7 +16,6 @@
         <nav class="navbar navbar-dark navbar-expand-lg">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">
-                    <!-- Ensure the file path is correct -->
                     <img src="{{ asset('images/2.png') }}" alt="Logo" style="height: 40px; width: auto;">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,24 +59,37 @@
                     </div>
                 </div>
                 <div class="mt-5">
-                    <h2> hello </h2>
+                    <h2>Pending Loans</h2>
 
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Id</th>
                                 <th>User</th>
                                 <th>Book Title</th>
                                 <th>Rent Date</th>
                                 <th>Return Date</th>
-                                <th>Actual Return Date</th>
-                                <th>Status</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @forelse($pendingLoans as $loan)
                             <tr>
-                               <td>No Data</td>
+                                <td>{{ $loan->user->name }}</td>
+                                <td>{{ $loan->book->title }}</td>
+                                <td>{{ $loan->borrow_date }}</td>
+                                <td>{{ $loan->return_date }}</td>
+                                <td>
+                                    <form action="{{ route('approve.loan', $loan->id) }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="btn btn-success">Approve</button>
+                                    </form>
+                                </td>
                             </tr>
+                            @empty
+                            <tr>
+                                <td colspan="5" class="text-center">No data</td>
+                            </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
@@ -83,31 +97,32 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
     <script>
-        // Function to handle logout
+        document.addEventListener('DOMContentLoaded', function() {
+            @if(session('success'))
+                alertify.success('{{ session('success') }}');
+            @endif
+            @if(session('error'))
+                alertify.error('{{ session('error') }}');
+            @endif
+        });
+    </script>
+    <script>
         function handleLogout(event) {
-            event.preventDefault(); // Prevent default action (following the link)
-
-            // Create a form element
+            event.preventDefault();
             var form = document.createElement('form');
-            form.method = 'POST'; // Set method to POST
-            form.action = '{{ route("logout") }}'; // Set form action to logout route
-
-            // Add CSRF token input field
+            form.method = 'POST';
+            form.action = '{{ route("logout") }}';
             var csrfTokenField = document.createElement('input');
             csrfTokenField.setAttribute('type', 'hidden');
             csrfTokenField.setAttribute('name', '_token');
             csrfTokenField.setAttribute('value', '{{ csrf_token() }}');
             form.appendChild(csrfTokenField);
-
-            // Append form to document body
             document.body.appendChild(form);
-
-            // Submit the form
             form.submit();
         }
 
-        // Add event listener to the logout link
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('logout-link').addEventListener('click', handleLogout);
         });

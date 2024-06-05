@@ -17,9 +17,8 @@ class BookspController extends Controller
 
     public function create()
     {
-        $statusFromDatabase = "in stock"; // Ganti dengan cara Anda mengambil nilai dari database
         $categories = Category::all();
-        return view('petugas.books-add', compact('statusFromDatabase', 'categories'));
+        return view('petugas.books-add', compact('categories'));
     }
 
     public function store(Request $request)
@@ -28,8 +27,9 @@ class BookspController extends Controller
             'book_code' => 'required',
             'title' => 'required',
             'author' => 'required',
-            'status' => 'required',
             'image_book' => 'required|image|mimes:jpeg,jpg,png|max:2048',
+            'description' => 'nullable',
+            'stock' => 'required|integer|min:0',
             'categories' => 'required|array'
         ]);
 
@@ -39,11 +39,12 @@ class BookspController extends Controller
             'book_code' => $request->book_code,
             'title' => $request->title,
             'author' => $request->author,
-            'status' => $request->status,
-            'image_book' => $imagePath
+            'image_book' => $imagePath,
+            'description' => $request->description,
+            'stock' => $request->stock
         ]);
 
-        $book->categories()->sync($request->categories); // Sync categories
+        $book->categories()->sync($request->categories);
 
         return redirect()->route('books')
             ->with('success', 'Book added successfully.');
@@ -64,8 +65,9 @@ class BookspController extends Controller
             'book_code' => 'required|unique:books,book_code,' . $book->id,
             'title' => 'required',
             'author' => 'required',
-            'status' => 'required',
             'image_book' => 'image|mimes:jpeg,jpg,png|max:2048',
+            'description' => 'nullable',
+            'stock' => 'required|integer|min:0',
             'categories' => 'required|array'
         ]);
 
@@ -81,7 +83,7 @@ class BookspController extends Controller
         }
 
         $book->update($data);
-        $book->categories()->sync($request->categories); // Sinkronisasi kategori
+        $book->categories()->sync($request->categories);
 
         return redirect()->route('books-edit', ['id' => $book->id])
             ->with('success', 'Book updated successfully.');
@@ -99,7 +101,6 @@ class BookspController extends Controller
         // Hapus buku dari database
         $book->delete();
 
-        // Redirect kembali ke halaman buku dengan pesan sukses
         return redirect()->route('books')
             ->with('success', 'Book deleted successfully.');
     }

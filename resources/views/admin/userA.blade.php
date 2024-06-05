@@ -38,6 +38,7 @@
                 <a href="dashboard" class="sidebar-custom"> Dashboard</a>
                 <a href="petugasA" class="sidebar-custom">Petugas</a>
                 <a href="userA" class="active">User</a>
+                <a href="Crudadmin" class="sidebar-custom">Admin</a>
                 <a href="#" class="sidebar-custom" id="logout-link"> Log out </a>
             </div>
             <div class="content">
