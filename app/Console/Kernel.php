@@ -12,6 +12,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
+        $schedule->call('App\Http\Controllers\HomePageCustomer@updateLoanStatus')->daily();
         // $schedule->command('inspire')->hourly();
     }
 

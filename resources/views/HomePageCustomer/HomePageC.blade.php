@@ -7,6 +7,11 @@
     <title>Home</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('path_to_your_css_folder/sweetalert2.min.css') }}">
+    <script src="{{ asset('path_to_your_js_folder/sweetalert2.min.js') }}"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs/build/css/alertify.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs/build/css/themes/default.min.css"/>
+
     <link rel="stylesheet" href="{{ asset('css/homeC.css') }}">
 
     <style>
@@ -72,10 +77,14 @@
                 </div>
                 {{-- profile --}}
                 <div class="flora d-flex align-items-center">
-                    <div class="rounded-circle overflow-hidden me-2" style="width: 35px; height: 35px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#profileModal">
-                        <img src="{{ asset('images/p.jpeg') }}" alt="Profile" class="img-fluid">
-                    </div>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#profileModal" class="d-flex align-items-center text-decoration-none">
+                        <div class="rounded-circle overflow-hidden me-2" style="width: 35px; height: 35px;">
+                            <img src="{{ asset('images/' . auth()->user()->gambar) }}" alt="Profile" class="img-fluid">
+                        </div>
+                        <p style="font-size: 16px; font-weight: 500; text-align: center; margin: 0;">Profile</p>
+                    </a>
                 </div>
+
             </div>
         </nav>
         <div class="body-content">
@@ -173,61 +182,154 @@
 
     <!-- Profile Modal -->
     <div class="modal fade scroll" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg ">
-            <div class="modal-content ">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="profileModalLabel">Profile</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="d-flex align-items-center mb-4">
-                        <div class="rounded-circle overflow-hidden me-3" style="width: 70px; height: 70px;">
-                            <img src="{{ asset('images/p.jpeg') }}" alt="Profile" class="img-fluid">
+                    <div id="profileView">
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="rounded-circle overflow-hidden me-3" style="width: 70px; height: 70px;">
+                                <img src="{{ asset('images/' . auth()->user()->gambar) }}" alt="Profile" class="img-fluid">
+                            </div>
+                            <div>
+                                <h5 class="mb-0">{{ auth()->user()->name }}</h5>
+                                <h5 class="mb-0">{{ auth()->user()->email }}</h5>
+                            </div>
+                            <div class="ms-auto">
+                                <button type="button" class="btn btn-primary mb-3" onclick="showEditProfile()">Edit Profile</button>
+                            </div>
                         </div>
-                        <div>
-                            <h5 class="mb-0">Shadiq</h5>
-                        </div>
-                    </div>
-                    <h6>History Peminjaman Buku</h6>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>No.</th>
-                                <th>Judul Buku</th>
-                                <th>Tanggal Peminjaman</th>
-                                <th>Tanggal Pengembalian</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($loans as $index => $loan)
+                        <h6>History Peminjaman Buku</h6>
+                        <table class="table">
+                            <thead>
                                 <tr>
-                                    <td>{{ $index + 1 }}</td>
-                                    <td>{{ $loan->book->title }}</td>
-                                    <td>{{ $loan->borrow_date }}</td>
-                                    <td>{{ $loan->return_date }}</td>
-                                    <td>
-                                        <div class="custom-button">
-                                            <center>
-                                                {{ $loan->status }}
-                                            </center>
-                                        </div>
-                                        <form action="{{ route('returned.loan', $loan->id) }}" method="POST">
-                                            @csrf
-                                            <button type="submit" class="btn btn-success">Returned</button>
-                                        </form>
-                                    </td>
+                                    <th>No.</th>
+                                    <th>Judul Buku</th>
+                                    <th>Tanggal Peminjaman</th>
+                                    <th>Tanggal Pengembalian</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach ($loans as $index => $loan)
+    @if($loan->status != 'cancel')
+        <tr>
+            <td>{{ $index + 1 }}</td>
+            <td>{{ $loan->book->title }}</td>
+            <td>{{ $loan->borrow_date }}</td>
+            <td>{{ $loan->return_date }}</td>
+            <td>{{ $loan->status }}</td>
+            <td>
+                @if($loan->status == 'pending')
+    <form action="{{ route('cancel.loan', $loan->id) }}" method="POST" class="cancel-loan-form">
+        @csrf
+        <button type="button" class="btn btn-danger cancel-button">Cancel</button>
+    </form>
+            @elseif($loan->status == 'dipinjam')
+                <form action="{{ route('returned.loan', $loan->id) }}" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-success returned-button">Returned</button>
+                </form>
+                @elseif($loan->status == 'selesai')
+                <form action="{{ route('borrow.again', $loan->id) }}" method="POST" class="borrow-again-form">
+                    @csrf
+                    <button type="submit" class="btn btn-primary borrow-again-button">Pinjam Lagi</button>
+                </form>
+                @endif
+            </td>
+        </tr>
+    @endif
+@endforeach
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div id="editProfileView" style="display: none;">
+                        <!-- Profile Edit Form -->
+                        <form action="{{ route('profile.edit') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="mb-3">
+                                <label for="profile-picture" class="form-label">Profile Picture</label>
+                                <input type="file" class="form-control" id="profile-picture" name="profile_picture" accept="image/*">
+                            </div>
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Username</label>
+                                <input type="text" class="form-control" id="username" name="username" value="{{ auth()->user()->name }}">
+                            </div>
+                            <button type="submit" class="btn btn-primary save-button">Save</button>
+                            <button type="button" class="btn btn-secondary" onclick="hideEditProfile()">Cancel</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alertifyjs/build/alertify.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        $(document).ready(function() {
+            // SweetAlert for cancel button
+            $('.cancel-button').on('click', function(e) {
+                e.preventDefault();
+                var form = $(this).closest('.cancel-loan-form');
+
+                Swal.fire({
+                    title: 'Apakah Anda yakin ingin mengcancel peminjaman?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, cancel it!',
+                    cancelButtonText: 'No, keep it'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            });
+
+            // Alertify for save button
+            $('.save-button').on('click', function(e) {
+                alertify.success('Profile updated successfully!');
+            });
+
+            // Alertify for returned button
+            $('.returned-button').on('click', function(e) {
+                alertify.success('Book returned successfully!');
+            });
+
+            // SweetAlert for pinjam lagi button
+            $('.borrow-again-button').on('click', function(e) {
+                e.preventDefault();
+                var form = $(this).closest('.borrow-again-form');
+
+                Swal.fire({
+                    title: 'Apakah Anda yakin ingin meminjam buku ini lagi?',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes',
+                    cancelButtonText: 'No'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            });
+        });
+    </script>
+
+
     <script>
         $(document).ready(function(){
             $('#All').addClass('show active');
@@ -308,6 +410,16 @@
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('logout-link').addEventListener('click', handleLogout);
         });
+
+        function showEditProfile() {
+            document.getElementById('profileView').style.display = 'none';
+            document.getElementById('editProfileView').style.display = 'block';
+        }
+
+        function hideEditProfile() {
+            document.getElementById('profileView').style.display = 'block';
+            document.getElementById('editProfileView').style.display = 'none';
+        }
     </script>
 </body>
 </html>

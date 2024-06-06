@@ -17,6 +17,10 @@ use App\Http\Controllers\BookspController;
 use App\Http\Controllers\HomeAController;
 use App\Http\Controllers\UsernameAController;
 use App\Http\Controllers\LoginAController;
+
+use App\Http\Controllers\DetailBookController;
+
+
 use App\Http\Controllers\PetugasAController;
 use App\Http\Controllers\UserAControllers;
 use App\Http\Controllers\AdminController;
@@ -24,7 +28,7 @@ use App\Http\Controllers\PeminjamanRegisterController;
 use App\Http\Controllers\HomePController;
 use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\RentlogpController;
-use App\Http\Controllers\DetailBookController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +52,10 @@ Route::get('/SetPasswordcustomer', [SetPasswordController::class, 'SetPasswordPa
 Route::get('/', function(){
     return redirect('/login');
 });
+Route::get('/HomePageCustomer', [HomePageCustomer::class, 'HomePageCustomer']);
+Route::get('/YourLibrary', [MylibraryController::class, 'Mylibrary']);
+Route::get('/Favorite', [FavoritePageC::class, 'FavoritePage']);
+
 
 
 //petugas
@@ -150,7 +158,13 @@ Route::middleware(['auth', 'role:peminjam'])->group(function () {
     Route::post('peminjam/borrow', [DetailBookController::class, 'store'])->name('borrow.book');
     Route::get('peminjam/rent', [PeminjamanController::class, 'index'])->name('peminjam.rent');
 
+    Route::get('peminjam/dashboard/test-update-loan-status', [HomePageCustomer::class, 'updateLoanStatus']);
     Route::get('peminjam/dashboard', [HomePageCustomer::class, 'index'])->name('peminjam.home');
+    Route::get('peminjam/dashboard/get', [HomePageCustomer::class, 'showProfile'])->name('profile.get');
+    Route::post('peminjam/dashboard/cancel-loan/{id}', [HomePageCustomer::class, 'CancelLoan'])->name('cancel.loan');
+    Route::post('peminjam/dashboard/returned-loan/{id}', [HomePageCustomer::class, 'ReturnedLoan'])->name('returned.loan');
+    Route::post('peminjam/dashboard/borrow-again/{id}', [HomePageCustomer::class, 'BorrowAgain'])->name('borrow.again');
+    Route::post('peminjam/dashboard/edit', [HomePageCustomer::class, 'editProfile'])->name('profile.edit');
     Route::post('peminjam/dashboard/{loan}/returned', [HomePageCustomer::class, 'ReturnedLoan'])->name('returned.loan');
     Route::get('peminjam/YourLibrary', [MylibraryController::class, 'Mylibrary'])->name('peminjam.Mylibrary');
     Route::get('peminjam/Favorite', [FavoritePageC::class, 'FavoritePage'])->name('peminjam.FavoritePage');

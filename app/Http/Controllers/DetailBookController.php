@@ -24,6 +24,15 @@ class DetailBookController extends Controller
             // tambahkan aturan validasi lainnya sesuai kebutuhan
         ]);
 
+        $existingLoan = Loan::where('book_id', $request->book_id)
+                        ->where('user_id', auth()->user()->id)
+                        ->whereIn('status', ['pending', 'dipinjam'])
+                        ->first();
+
+    if ($existingLoan) {
+        return redirect()->back()->with('error', 'Anda sudah meminjam buku ini sebelumnya.');
+    }
+
         // Buat peminjaman baru
         $loan = new Loan();
         $loan->user_id = auth()->user()->id; // Ambil ID user yang sedang login

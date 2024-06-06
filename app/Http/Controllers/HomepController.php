@@ -19,7 +19,7 @@ class HomepController extends Controller
         $loan = Loan::findOrFail($id);
         $loan->status = 'dipinjam';
         $loan->borrow_date = now();
-        $loan->return_date = Carbon::now()->addDays(7); // Atur tanggal pengembalian 7 hari dari sekarang
+        $loan->return_date = Carbon::now()->addDays(1); 
         $loan->save();
 
         return redirect()->back()->with('success', 'Loan approved successfully.');

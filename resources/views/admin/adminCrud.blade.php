@@ -24,12 +24,6 @@
                     <form class="d-flex me-auto" role="search">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     </form>
-                    <div class=" flora d-flex align-items-center">
-                        <div class="rounded-circle overflow-hidden me-2" style="width: 35px; height: 35px;">
-                            <img src="{{ asset('images/p.jpeg') }}" alt="Profile" class="img-fluid">
-                        </div>
-                        <span class="text-light-1">Shadiq Usep</span>
-                    </div>
                 </div>
             </div>
         </nav>

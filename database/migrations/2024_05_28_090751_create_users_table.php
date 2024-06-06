@@ -14,6 +14,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('role', ['administrator', 'petugas', 'peminjam'])->default('peminjam');
+            $table->string('gambar')->default('prf.png');
             $table->rememberToken();
             $table->timestamps();
         });

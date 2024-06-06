@@ -3,23 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\BookLoan;
-
+use App\Models\Loan;
 
 class RentlogpController extends Controller
 {
     public function rentPage()
     {
+        // Mengambil data pinjaman
+        $loans = Loan::all();
 
-        return view('petugas.rent',);
-    }
+        // Menghitung jumlah pinjaman berdasarkan status
+        $borrowedCount = Loan::where('status', 'dipinjam')->count();
+        $completedCount = Loan::where('status', 'selesai')->count();
+        $canceledCount = Loan::where('status', 'cancel')->count();
 
-    public function approveLoan($id)
-    {
-        $bookLoan = BookLoan::find($id);
-        $bookLoan->status = 'dipinjam';
-        $bookLoan->save();
-
-        return redirect()->back()->with('success', 'Peminjaman buku berhasil di-approve!');
+        // Mengirim data pinjaman dan jumlah pinjaman ke view
+        return view('petugas.rent', compact('loans', 'borrowedCount', 'completedCount', 'canceledCount'));
     }
 }

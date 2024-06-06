@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>We Could Be Heroes</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -205,5 +207,16 @@
             </div>
         </section>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        @if(session('success'))
+            alertify.success('{{ session('success') }}');
+        @endif
+        @if(session('error'))
+            alertify.error('{{ session('error') }}');
+        @endif
+    });
+</script>
 </body>
 </html>
