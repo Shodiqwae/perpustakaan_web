@@ -41,10 +41,7 @@ use App\Http\Controllers\RentlogpController;
 |
 */
 
-/*  Login Customer  */
-Route::get('/logincustomer', [loginController::class, 'LoginPage']);
-Route::get('/forgotpasswordcustomer', [forgotController::class, 'forgotPage']);
-Route::get('/SetPasswordcustomer', [SetPasswordController::class, 'SetPasswordPage']);
+
 
 
 
@@ -52,16 +49,6 @@ Route::get('/SetPasswordcustomer', [SetPasswordController::class, 'SetPasswordPa
 Route::get('/', function(){
     return redirect('/login');
 });
-Route::get('/HomePageCustomer', [HomePageCustomer::class, 'HomePageCustomer']);
-Route::get('/YourLibrary', [MylibraryController::class, 'Mylibrary']);
-Route::get('/Favorite', [FavoritePageC::class, 'FavoritePage']);
-
-
-
-//petugas
-
-Route::get('home', [App\Http\Controllers\HomepController::class, 'homePage'])->name('home');
-Route::get('dashboard', [App\Http\Controllers\DashboardController::class, 'dashboardpage'])->name('dashboard');
 
 
 //Route Book petugas
@@ -125,6 +112,7 @@ Route::middleware(['auth', 'role:petugas'])->group(function () {
 
 
     Route::get('petugas/rent', [RentlogpController::class, 'rentPage'])->name('rent.page');
+    Route::get('petugas/rent/download-pdf', [RentlogpController::class, 'downloadPDF'])->name('rentlog.downloadPDF');
     Route::put('petugas/bookloans/{id}/approve', [RentlogpController::class, 'approveLoan'])->name('bookloans.approve');
     Route::get('petugas/books', [App\Http\Controllers\BookspController::class, 'booksPage'])->name('books');
     Route::get('petugas/books/create', [App\Http\Controllers\BookspController::class, 'create'])->name('books.create');
@@ -135,7 +123,10 @@ Route::middleware(['auth', 'role:petugas'])->group(function () {
 
 
     Route::get('petugas/dashboard', [HomePController::class, 'homePage'])->name('petugas.homeP');
-    Route::post('petugas/loans/{loan}/approve', [HomePController::class, 'approveLoan'])->name('approve.loan');
+    Route::post('petugas/approve-loan/{id}', [HomepController::class, 'approveLoan'])->name('approve.loan');
+
+    // Route untuk mengembalikan pinjaman
+    Route::post('petugas/returned-loan/{id}', [HomepController::class, 'ReturnedLoan'])->name('returned.loan');
 
     Route::get('petugas/category', [App\Http\Controllers\CategorypController::class, 'index'])->name('petugas.category');
     Route::get('petugas/category-add', [App\Http\Controllers\CategorypController::class, 'add'])->name('petugas.category-add');
@@ -162,10 +153,8 @@ Route::middleware(['auth', 'role:peminjam'])->group(function () {
     Route::get('peminjam/dashboard', [HomePageCustomer::class, 'index'])->name('peminjam.home');
     Route::get('peminjam/dashboard/get', [HomePageCustomer::class, 'showProfile'])->name('profile.get');
     Route::post('peminjam/dashboard/cancel-loan/{id}', [HomePageCustomer::class, 'CancelLoan'])->name('cancel.loan');
-    Route::post('peminjam/dashboard/returned-loan/{id}', [HomePageCustomer::class, 'ReturnedLoan'])->name('returned.loan');
     Route::post('peminjam/dashboard/borrow-again/{id}', [HomePageCustomer::class, 'BorrowAgain'])->name('borrow.again');
     Route::post('peminjam/dashboard/edit', [HomePageCustomer::class, 'editProfile'])->name('profile.edit');
-    Route::post('peminjam/dashboard/{loan}/returned', [HomePageCustomer::class, 'ReturnedLoan'])->name('returned.loan');
     Route::get('peminjam/YourLibrary', [MylibraryController::class, 'Mylibrary'])->name('peminjam.Mylibrary');
     Route::get('peminjam/Favorite', [FavoritePageC::class, 'FavoritePage'])->name('peminjam.FavoritePage');
 

@@ -225,15 +225,11 @@
             <td>{{ $loan->status }}</td>
             <td>
                 @if($loan->status == 'pending')
-    <form action="{{ route('cancel.loan', $loan->id) }}" method="POST" class="cancel-loan-form">
-        @csrf
-        <button type="button" class="btn btn-danger cancel-button">Cancel</button>
-    </form>
-            @elseif($loan->status == 'dipinjam')
-                <form action="{{ route('returned.loan', $loan->id) }}" method="POST">
-                @csrf
-                <button type="submit" class="btn btn-success returned-button">Returned</button>
+                <form action="{{ route('cancel.loan', $loan->id) }}" method="POST" class="cancel-loan-form">
+                     @csrf
+                <button type="button" class="btn btn-danger cancel-button">Cancel</button>
                 </form>
+
                 @elseif($loan->status == 'selesai')
                 <form action="{{ route('borrow.again', $loan->id) }}" method="POST" class="borrow-again-form">
                     @csrf

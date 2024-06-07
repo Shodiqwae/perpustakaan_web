@@ -30,7 +30,9 @@
                 <a href="#" class="sidebar-custom" id="logout-link"> Log out </a>
             </div>
             <div class="content">
-                <h2>Rent Log</h2>
+                <h2>Rent Log <button type="button" style="font-size: 20px;margin-left:75%" class="btn btn-success" onclick="window.location.href='{{ route('rentlog.downloadPDF') }}'">Download PDF</button>
+                </h2>
+
                 <div class="row mt-4">
                     <div class="col-lg-4">
                         <div class="card p-3 d-flex flex-row align-items-center card-data-book">

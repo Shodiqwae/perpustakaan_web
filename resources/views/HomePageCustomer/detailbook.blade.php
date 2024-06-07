@@ -18,36 +18,38 @@
             justify-content: center;
         }
 
-        .deskripsi{
+        .deskripsi {
             height: 200px;
             border-radius: 20px;
         }
-.back {
-  transition: all 0.3s ease-in-out;
-  font-family: "Dosis", sans-serif;
-}
 
-.back {
-  width: 150px;
-  height: 60px;
-  border-radius: 50px;
-  background-image: linear-gradient(135deg, #8197dc 0%,  #a6a6a8 100%);
-  box-shadow: 0 20px 30px -6px rgba(4, 15, 139, 0.5);
-  outline: none;
-  cursor: pointer;
-  border: none;
-  font-size: 24px;
-  color: white;
-}
+        .back {
+            transition: all 0.3s ease-in-out;
+            font-family: "Dosis", sans-serif;
+        }
 
-.back:hover {
-  transform: translateY(3px);
-  box-shadow: none;
-}
+        .back {
+            width: 150px;
+            height: 60px;
+            border-radius: 50px;
+            background-image: linear-gradient(135deg, #8197dc 0%, #a6a6a8 100%);
+            box-shadow: 0 20px 30px -6px rgba(4, 15, 139, 0.5);
+            outline: none;
+            cursor: pointer;
+            border: none;
+            font-size: 24px;
+            color: white;
+        }
 
-.back:active {
-  opacity: 0.5;
-}
+        .back:hover {
+            transform: translateY(3px);
+            box-shadow: none;
+        }
+
+        .back:active {
+            opacity: 0.5;
+        }
+
         .container {
             width: 90%;
             height: 90%;
@@ -61,31 +63,28 @@
         }
 
         .header {
-    display: flex;
-    align-items: center;
-    background: linear-gradient(to right, #3a6186, #89253e);
-    color: white;
-    padding: 30px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-}
+            display: flex;
+            align-items: center;
+            background: linear-gradient(to right, #3a6186, #89253e);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
 
+        .header .header-content {
+            text-align: center;
+            margin-right: 120px;
+            flex-grow: 1;
+        }
 
+        .header .header-content h1 {
+            margin: 0;
+        }
 
-.header .header-content {
-    text-align: center;
-    margin-right: 120px;
-    flex-grow: 1;
-}
-
-.header .header-content h1 {
-    margin: 0;
-}
-
-.header .header-content p {
-    margin: 0;
-}
-
+        .header .header-content p {
+            margin: 0;
+        }
 
         .main-content {
             display: flex;
@@ -185,7 +184,7 @@
                     <button class="add-to-favorites" style="background-color: #4f54b3;color:white;font-weight:600">Add To Favorit</button>
                     <form action="{{ route('borrow.book') }}" method="POST" style="margin-top:19px">
                         @csrf
-                        <input type="hidden" name="book_id" value="{{ $book->id }}"> <!-- Mengganti $book->id menjadi $item->id -->
+                        <input type="hidden" name="book_id" value="{{ $book->id }}">
                         <button type="submit" style="background-color: #4f54b3;color:white;font-weight:600">Borrow</button>
                     </form>
                 </div>
@@ -195,7 +194,6 @@
                 <div class="book-info">
                     <p style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;font-weight: bold;font-size:18px">By: {{ $book->author }}</p>
                     <p style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;font-weight: bold;font-size:16px">Stock: {{ $book->stock }}</p>
-
                 </div>
             </div>
         </main>
@@ -208,15 +206,15 @@
         </section>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        @if(session('success'))
-            alertify.success('{{ session('success') }}');
-        @endif
-        @if(session('error'))
-            alertify.error('{{ session('error') }}');
-        @endif
-    });
-</script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            @if(session('success'))
+                alertify.success('{{ session('success') }}');
+            @endif
+            @if(session('error'))
+                alertify.error('{{ session('error') }}');
+            @endif
+        });
+    </script>
 </body>
 </html>

@@ -7,7 +7,6 @@ use App\Models\Book;
 use App\Models\Loan;
 use Carbon\Carbon;
 
-
 class DetailBookController extends Controller
 {
     public function DetailBook($id)
@@ -25,13 +24,25 @@ class DetailBookController extends Controller
         ]);
 
         $existingLoan = Loan::where('book_id', $request->book_id)
-                        ->where('user_id', auth()->user()->id)
-                        ->whereIn('status', ['pending', 'dipinjam'])
-                        ->first();
+                            ->where('user_id', auth()->user()->id)
+                            ->whereIn('status', ['pending', 'dipinjam'])
+                            ->first();
 
-    if ($existingLoan) {
-        return redirect()->back()->with('error', 'Anda sudah meminjam buku ini sebelumnya.');
-    }
+        if ($existingLoan) {
+            return redirect()->back()->with('error', 'Anda sudah meminjam buku ini sebelumnya.');
+        }
+
+        // Dapatkan buku yang akan dipinjam
+        $book = Book::findOrFail($request->book_id);
+
+        // Periksa apakah stok mencukupi
+        if ($book->stock < 1) {
+            return redirect()->back()->with('error', 'Stok buku tidak mencukupi.');
+        }
+
+        // Kurangi stok buku
+        $book->stock -= 1;
+        $book->save();
 
         // Buat peminjaman baru
         $loan = new Loan();

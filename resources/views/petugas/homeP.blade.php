@@ -58,9 +58,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="mt-5">
-                    <h2>Pending Loans</h2>
 
+                <div class="mt-5">
+                    <h2>Loans</h2>
                     <table class="table">
                         <thead>
                             <tr>
@@ -68,31 +68,41 @@
                                 <th>Book Title</th>
                                 <th>Rent Date</th>
                                 <th>Return Date</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse($pendingLoans as $loan)
+                            @forelse($loans as $loan)
                             <tr>
                                 <td>{{ $loan->user->name }}</td>
                                 <td>{{ $loan->book->title }}</td>
                                 <td>{{ $loan->borrow_date }}</td>
                                 <td>{{ $loan->return_date }}</td>
+                                <td>{{ ucfirst($loan->status) }}</td>
                                 <td>
+                                    @if($loan->status == 'pending')
                                     <form action="{{ route('approve.loan', $loan->id) }}" method="POST">
                                         @csrf
                                         <button type="submit" class="btn btn-success">Approve</button>
                                     </form>
+                                    @elseif($loan->status == 'dipinjam')
+                                    <form action="{{ route('returned.loan', $loan->id) }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="btn btn-primary">Returned</button>
+                                    </form>
+                                    @endif
                                 </td>
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="5" class="text-center">No data</td>
+                                <td colspan="6" class="text-center">No data</td>
                             </tr>
                             @endforelse
                         </tbody>
                     </table>
                 </div>
+
             </div>
         </div>
     </div>

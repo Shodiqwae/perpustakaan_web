@@ -16,14 +16,7 @@ class HomePageCustomer extends Controller
         return view('HomePageCustomer.HomePageC', compact('books', 'loans'));
     }
 
-    public function ReturnedLoan($id)
-    {
-        $loan = Loan::findOrFail($id);
-        $loan->status = 'selesai';
-        $loan->save();
 
-        return redirect()->back()->with('success', 'Loan returned successfully.');
-    }
 
     public function CancelLoan($id)
     {
@@ -44,6 +37,7 @@ class HomePageCustomer extends Controller
 
         return redirect()->back()->with('success', 'Loan approved successfully.');
     }
+
 
     public function updateLoanStatus()
     {
