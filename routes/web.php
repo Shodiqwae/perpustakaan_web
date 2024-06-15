@@ -2,6 +2,8 @@
 
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DetailBookOnline;
+use App\Http\Controllers\IsiDetailBook;
 use App\Http\Controllers\CrudAdminController;
 use App\Http\Controllers\LoanController;
 use App\Http\Controllers\AuthLoginController;
@@ -59,16 +61,16 @@ Route::get('/', function(){
 
 
 //Route Category petugas
+// Registrasi Admin
+
+Route::get('register-admin', [RegisAController::class, 'showRegistrationForm'])->name('register.admin');
+Route::post('register-admin', [RegisAController::class, 'register'])->name('register.admin.post');
+Route::post('check-duplicate', [RegisAController::class, 'checkDuplicate'])->name('checkDuplicate');
 
 
 Route::get('login', [AuthLoginController::class, 'showLoginForm'])->name('login');
 Route::post('login', [AuthLoginController::class, 'login'])->name('login.post');
 Route::post('logout', [AuthLoginController::class, 'logout'])->name('logout');
-
-// Registrasi Admin
-Route::get('register-admin', [RegisAController::class, 'showRegistrationForm'])->name('register.admin');
-Route::post('register-admin', [RegisAController::class, 'register'])->name('register.admin.post');
-Route::post('check-duplicate', [RegisAController::class, 'checkDuplicate'])->name('checkDuplicate');
 
 
 // Registrasi Peminjam
@@ -108,9 +110,6 @@ Route::middleware(['auth', 'role:administrator'])->group(function () {
 
 // Dashboard Petugas
 Route::middleware(['auth', 'role:petugas'])->group(function () {
-
-
-
     Route::get('petugas/rent', [RentlogpController::class, 'rentPage'])->name('rent.page');
     Route::get('petugas/rent/download-pdf', [RentlogpController::class, 'downloadPDF'])->name('rentlog.downloadPDF');
     Route::put('petugas/bookloans/{id}/approve', [RentlogpController::class, 'approveLoan'])->name('bookloans.approve');
@@ -120,8 +119,6 @@ Route::middleware(['auth', 'role:petugas'])->group(function () {
     Route::get('petugas/books/{id}/edit', [BookspController::class, 'edit'])->name('books-edit');
     Route::put('petugas/books/{id}', [BookspController::class, 'update'])->name('books.update');
     Route::delete('petugas/books/{book}', [BookspController::class, 'destroy'])->name('books.destroy');
-
-
     Route::get('petugas/dashboard', [HomePController::class, 'homePage'])->name('petugas.homeP');
     Route::post('petugas/approve-loan/{id}', [HomepController::class, 'approveLoan'])->name('approve.loan');
 
@@ -147,6 +144,10 @@ Route::middleware(['auth', 'role:petugas'])->group(function () {
 Route::middleware(['auth', 'role:peminjam'])->group(function () {
     Route::get('peminjam/detail/{id}', [DetailBookController::class, 'DetailBook'])->name('peminjam.detail');
     Route::post('peminjam/borrow', [DetailBookController::class, 'store'])->name('borrow.book');
+    Route::post('peminjam/add-to-favorite', [DetailBookController::class, 'addToFavorite'])->name('add.to.favorite');
+    Route::get('peminjam/DetailBookOnline', [DetailBookOnline::class, 'showdetailform'])->name('peminjam.detailonline');
+    Route::get('peminjam/IsiDetailBook', [IsiDetailBook::class, 'showdetailform'])->name('peminjam.isidetail');
+
     Route::get('peminjam/rent', [PeminjamanController::class, 'index'])->name('peminjam.rent');
 
     Route::get('peminjam/dashboard/test-update-loan-status', [HomePageCustomer::class, 'updateLoanStatus']);
@@ -157,6 +158,9 @@ Route::middleware(['auth', 'role:peminjam'])->group(function () {
     Route::post('peminjam/dashboard/edit', [HomePageCustomer::class, 'editProfile'])->name('profile.edit');
     Route::get('peminjam/YourLibrary', [MylibraryController::class, 'Mylibrary'])->name('peminjam.Mylibrary');
     Route::get('peminjam/Favorite', [FavoritePageC::class, 'FavoritePage'])->name('peminjam.FavoritePage');
+    Route::delete('peminjam/favorite/{id}', [FavoritePageC::class, 'deleteFavorite'])->name('favorite.delete');
+
+
 
     Route::post('peminjam/logout', [AuthLoginController::class, 'logout'])->name('peminjam.logout');
 

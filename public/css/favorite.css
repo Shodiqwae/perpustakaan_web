@@ -129,6 +129,11 @@
     text-align: right;
 }
 
+.scrollable-content {
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
 .navbar .form-control {
     margin-left: 110px;
 }

@@ -34,11 +34,12 @@
             </div>
         </nav>
         <div class="body-content">
-            <div class="sidebar d-lg-block collapse" id="navbarTogglerDemo02">
-                <a href="homeA">Dashboard</a>
-                <a href="petugasA" class="active">Petugas</a>
-                <a href="">User</a>
-                <a href="loginA">Log out</a>
+            <div class="sidebar d-lg-block collapse" id="navbarTogglerDemo02"  style="background-color: rgb(41, 41, 171);">
+                <a href="{{ route('admin.homeA') }}" class="sidebar-custom">Dashboard</a>
+                <a href="{{ route('petugasA.index') }}" class="active">Petugas</a>
+                <a href="{{ route('userA.index') }}" class="sidebar-custom">User</a>
+                <a href="{{ route('CrudAdmin.index') }}" class="sidebar-custom">Admin</a>
+                <a href="loginA" class="sidebar-custom">Log out</a>
             </div>
             <div class="content">
                 <h2>Edit Petugas</h2>

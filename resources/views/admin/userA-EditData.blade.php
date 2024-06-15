@@ -38,6 +38,7 @@
                 <a href="{{ route('admin.homeA') }}" class="sidebar-custom"> Dashboard</a>
                 <a href="{{ route('petugasA.index') }}" class="sidebar-custom">Petugas</a>
                 <a href="{{ route('userA.index') }}" class="active">User</a>
+                <a href="{{ route('CrudAdmin.index') }}" class='sidebar-custom'>Admin</a>
                 <a href="admin/loginA" class="sidebar-custom"> Log out </a>
             </div>
             <div class="content">

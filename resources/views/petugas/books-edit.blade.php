@@ -23,7 +23,7 @@
         </nav>
         <div class="body-content">
             <div class="sidebar d-lg-block" id="navbarTogglerDemo02"  style="background-color: rgb(41, 41, 171); color: white">
-                <a href="{{ route('home') }}" class="sidebar-custom"> Dashboard</a>
+                <a href="{{ route('petugas.homeP') }}" class="sidebar-custom"> Dashboard</a>
                 <a href="{{ route('books') }}" class="active"> Books </a>
                 <a href="{{ route('petugas.category') }}" class="sidebar-custom">Category</a>
                 <a href="{{ route('rent.page') }}" class="sidebar-custom"> Rent Log </a>
@@ -87,6 +87,10 @@
                             @if ($book->image_book)
                             <img src="{{ asset('storage/'.$book->image_book) }}" alt="{{ $book->title }}" style="height: 100px;">
                             @endif
+                          </div>
+                          <div class="form-group mb-3">
+                            <label for="title" class="form-label">Description</label>
+                            <input type="text" name="description" id="description" class="form-control" placeholder="Deskripsi" required value="{{ old('description', $book->description) }}">
                           </div>
 
 

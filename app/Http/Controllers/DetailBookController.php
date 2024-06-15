@@ -1,10 +1,10 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Book;
 use App\Models\Loan;
+use App\Models\Favorite;
 use Carbon\Carbon;
 
 class DetailBookController extends Controller
@@ -12,7 +12,12 @@ class DetailBookController extends Controller
     public function DetailBook($id)
     {
         $book = Book::findOrFail($id);
-        return view('HomePageCustomer.detailbook', compact('book'));
+        $userLoan = Loan::where('book_id', $id)
+                        ->where('user_id', auth()->user()->id)
+                        ->whereIn('status', ['pending', 'dipinjam'])
+                        ->first();
+
+        return view('HomePageCustomer.detailbook', compact('book', 'userLoan'));
     }
 
     public function store(Request $request)
@@ -20,7 +25,6 @@ class DetailBookController extends Controller
         // Validasi request
         $request->validate([
             'book_id' => 'required|exists:books,id',
-            // tambahkan aturan validasi lainnya sesuai kebutuhan
         ]);
 
         $existingLoan = Loan::where('book_id', $request->book_id)
@@ -46,13 +50,48 @@ class DetailBookController extends Controller
 
         // Buat peminjaman baru
         $loan = new Loan();
-        $loan->user_id = auth()->user()->id; // Ambil ID user yang sedang login
+        $loan->user_id = auth()->user()->id;
         $loan->book_id = $request->book_id;
-        $loan->borrow_date = now(); // Atur tanggal peminjaman
-        $loan->status = 'pending'; // Atur status peminjaman sebagai pending
+        $loan->borrow_date = now();
+        $loan->status = 'pending';
         $loan->save();
 
-        // Redirect atau berikan respons sesuai kebutuhan
         return redirect()->back()->with('success', 'Peminjaman berhasil dilakukan.');
+    }
+    public function addToFavorite(Request $request)
+    {
+        $request->validate([
+            'book_id' => 'required|exists:books,id',
+        ]);
+
+        // Cek apakah buku sudah ditambahkan ke favorit sebelumnya
+        $existingFavorite = Favorite::where('book_id', $request->book_id)
+                                     ->where('user_id', auth()->user()->id)
+                                     ->first();
+
+        if ($existingFavorite) {
+            return redirect()->back()->with('error', 'Buku sudah ditambahkan ke favorit sebelumnya.');
+        }
+
+        // Tambahkan buku ke favorit
+        $favorite = new Favorite();
+        $favorite->user_id = auth()->user()->id;
+        $favorite->book_id = $request->book_id;
+        $favorite->save();
+
+        return redirect()->back()->with('success', 'Buku berhasil ditambahkan ke favorit.');
+    }
+
+
+
+    public function showApiCategory($id)
+    {
+        {
+            $book = Book::with('categories')->findOrFail($id);
+            return response()->json([
+                'success' => true,
+                'data' => $book,
+            ]);
+        }
     }
 }

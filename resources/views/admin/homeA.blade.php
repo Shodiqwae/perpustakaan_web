@@ -8,6 +8,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/style1.css') }}">
+    <style>
+
+
+    </style>
 </head>
 <body>
     <div class="main">
@@ -21,7 +25,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                     <form class="d-flex me-auto" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="searchInput">
                     </form>
                 </div>
             </div>
@@ -99,6 +103,28 @@
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('logout-link').addEventListener('click', handleLogout);
         });
+
+        document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('logout-link').addEventListener('click', handleLogout);
+
+    document.getElementById('searchInput').addEventListener('input', function() {
+        var searchText = this.value.toLowerCase().trim();
+        var tableRows = document.querySelectorAll('.table tbody tr');
+
+        tableRows.forEach(function(row) {
+            var bookTitle = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+            if (bookTitle.includes(searchText)) {
+                row.classList.add('highlight');
+                row.style.display = ''; // Menampilkan baris yang cocok
+            } else {
+                row.classList.remove('highlight');
+                row.style.display = 'none'; // Menyembunyikan baris yang tidak cocok
+            }
+        });
+    });
+});
+
+
     </script>
 </body>
 </html>

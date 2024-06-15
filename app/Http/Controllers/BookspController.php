@@ -66,7 +66,7 @@ class BookspController extends Controller
             'title' => 'required',
             'author' => 'required',
             'image_book' => 'image|mimes:jpeg,jpg,png|max:2048',
-            'description' => 'nullable',
+            'description' => 'required',
             'stock' => 'required|integer|min:0',
             'categories' => 'required|array'
         ]);

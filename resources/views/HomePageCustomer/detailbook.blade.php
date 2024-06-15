@@ -181,11 +181,19 @@
                     <p>{{ $book->description }}</p>
                 </div>
                 <div class="buttons">
-                    <button class="add-to-favorites" style="background-color: #4f54b3;color:white;font-weight:600">Add To Favorit</button>
+                    <form action="{{ route('add.to.favorite') }}" method="POST" style="margin-top:19px">
+                        @csrf
+                        <input type="hidden" name="book_id" value="{{ $book->id }}">
+                        <button type="submit" style="background-color: #4f54b3;color:white;font-weight:600">Add To Favorite</button>
+                    </form>
                     <form action="{{ route('borrow.book') }}" method="POST" style="margin-top:19px">
                         @csrf
                         <input type="hidden" name="book_id" value="{{ $book->id }}">
-                        <button type="submit" style="background-color: #4f54b3;color:white;font-weight:600">Borrow</button>
+                        @if($userLoan)
+                            <button type="submit" class="btn btn-secondary" disabled>Already Borrowed</button>
+                        @else
+                            <button type="submit" style="background-color: #4f54b3; color: white; font-weight: 600">Borrow</button>
+                        @endif
                     </form>
                 </div>
             </div>

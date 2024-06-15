@@ -48,7 +48,7 @@
                                 <p class="card-text" style="color: rgb(110, 110, 110);">Novel</p>
                                 <div class="row">
                                     <div class="d-flex">
-                                    <button class="btn btn-secondary " style="font-size: 12px; height: 30px; text-align: right; "> online </button>
+                                    <button class="btn btn-secondary " style="font-size: 12px; height: 30px; text-align: right; " onclick="window.location.href= '{{ route('peminjam.detailonline') }}'"  > Detail </button>
                                     </div>
                                 </div>
                             </div>
