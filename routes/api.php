@@ -8,6 +8,7 @@ use App\Http\Controllers\HomePageCustomer;
 use App\Http\Controllers\BookControllerApi;
 use App\Http\Controllers\FavoritePageC;
 use App\Http\Controllers\DetailBookController;
+use App\Http\Controllers\ReviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,13 @@ Route::post('add-to-favorites', [FavoritePageC::class, 'addToFavorites']);
 Route::delete('remove-from-favorites/{book}', [FavoritePageC::class, 'removeFromFavorites']);
 Route::get('check-favorite/{userId}/{bookId}', [FavoritePageC::class, 'checkFavorite']);
 Route::get('category/{id}', [DetailBookController::class, 'showApiCategory']);
+Route::post('peminjam/store-rating', [HomePageCustomer::class, 'storeRating'])->name('store.rating');
+Route::post('borrow-again/{id}', [HomePageCustomer::class, 'BorrowAgainApi']);
+Route::post('submit-review', [HomePageCustomer::class, 'storeRatingApi']);
+Route::get('book-rating/{book_id}', 'App\Http\Controllers\HomePageCustomer@getBookRating');
+
+
+
 
 
 

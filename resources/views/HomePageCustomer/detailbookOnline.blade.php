@@ -120,11 +120,31 @@
             color: gold;
             font-size: 1.2em;
         }
-    </style>
+        .back-button {
+            position: absolute;
+            top: 50px;
+            left: 100px;
+        }
+
+        .back-button button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 16px;
+            background-color: #f6f6f6;
+            color: black;
+        }
+
+</style>
 </head>
 <body>
     <div class="container">
+
         <header class="header">
+            <div class="back-button">
+                <button onclick="window.location.href='{{ route('peminjam.Mylibrary') }}'">Back</button>
+            </div>
             <h1>We Could Be Heroes</h1>
             <p>Tumbuhan Flores</p>
         </header>

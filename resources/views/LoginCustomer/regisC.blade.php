@@ -174,14 +174,14 @@
                 </div>
             @endif
 
+            <label for="name">Username</label>
+            <input type="name" id="name" name="name" placeholder="Username" required>
                 <label for="email">Email</label>
                 <input type="name" id="email" name="email" placeholder="Email" required>
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" placeholder="Password" required>
                 <label for="password_confirmation">Confirm Password</label>
                 <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Confirm Password" required>
-                <label for="name">Username</label>
-                <input type="name" id="name" name="name" placeholder="Username" required>
                 <div class="forgot-password">
                     <a href="{{ route('login') }}" style="color: white">Login?</a>
                 </div>

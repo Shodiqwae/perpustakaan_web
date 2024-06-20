@@ -11,10 +11,17 @@
     <script src="{{ asset('path_to_your_js_folder/sweetalert2.min.js') }}"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs/build/css/alertify.min.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs/build/css/themes/default.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
 
     <link rel="stylesheet" href="{{ asset('css/homeC.css') }}">
 
     <style>
+           .checked {
+        color: orange;
+    }
        .scroll::-webkit-scrollbar {
     background-color: rgba(226, 225, 247, 0);
 }
@@ -153,16 +160,16 @@
                                                 <h5 class="card-title custom-text">{{ $item->title }}</h5>
                                                 <p class="card-text" style="color: rgb(110, 110, 110);">{{ $item->categories->pluck('name')->join(', ') }}</p>
                                                 <div class="row">
+
                                                     <div class="d-flex">
-                                                        <img src="{{ asset('images/star1.png') }}" alt="bintanh" style="height: 1.3pc; width: 1.3pc">
-                                                        <p style="font-size: 14px; color: rgb(110, 110, 110); margin-left: 10px">4.5</p>
+                                                        <img src="{{ asset('images/star1.png') }}" alt="bintang" style="height: 1.3pc; width: 1.3pc">
+                                                        <p style="font-size: 14px; color: rgb(110, 110, 110); margin-left: 10px">{{ number_format($item->average_rating, 1) }}</p>
 
                                                         <!-- Form untuk meminjam buku -->
-
-
-                                                            <button type="submit" class="btn btn-secondary"  style="font-size: 12px; height: 30px;margin-left: 40px">online</button>
-
+                                                        <button type="submit" class="btn btn-secondary" style="font-size: 12px; height: 30px; margin-left: 40px">online</button>
                                                     </div>
+
+
                                                 </div>
                                             </div>
                                         </a> <!-- Tutup tautan -->
@@ -216,7 +223,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($loans as $index => $loan)
-    @if($loan->status != 'cancel')
+    @if ($loan->status != 'cancel')
         <tr>
             <td>{{ $index + 1 }}</td>
             <td>{{ $loan->book->title }}</td>
@@ -224,22 +231,34 @@
             <td>{{ $loan->return_date }}</td>
             <td>{{ $loan->status }}</td>
             <td>
-                @if($loan->status == 'pending')
-                <form action="{{ route('cancel.loan', $loan->id) }}" method="POST" class="cancel-loan-form">
-                     @csrf
-                <button type="button" class="btn btn-danger cancel-button">Cancel</button>
-                </form>
+                @if ($loan->status == 'pending')
+                    <form action="{{ route('cancel.loan', $loan->id) }}" method="POST" class="cancel-loan-form">
+                        @csrf
+                        <button type="button" class="btn btn-danger cancel-button">Cancel</button>
+                    </form>
+                @elseif ($loan->status == 'selesai')
+                @php
+                // Check apakah pengguna sudah memberikan ulasan untuk buku ini
+                $userHasRated = $loan->book->ratings()->where('user_id', Auth::id())->exists();
+            @endphp
 
-                @elseif($loan->status == 'selesai')
+            @if ($userHasRated)
                 <form action="{{ route('borrow.again', $loan->id) }}" method="POST" class="borrow-again-form">
                     @csrf
-                    <button type="submit" class="btn btn-primary borrow-again-button">Pinjam Lagi</button>
+                    <button type="submit" class="btn btn-secondary" style="margin-top: 10px">Pinjam Lagi</button>
                 </form>
-                @endif
+            @else
+                <button class="btn btn-secondary ulasan-button" style="margin-top: 10px" data-book-id="{{ $loan->book->id }}" onclick="showRatingView(this)">Ulasan</button>
+            @endif
+        @endif
+
             </td>
         </tr>
     @endif
 @endforeach
+
+
+
                             </tbody>
                         </table>
 
@@ -260,6 +279,34 @@
                             <button type="button" class="btn btn-secondary" onclick="hideEditProfile()">Cancel</button>
                         </form>
                     </div>
+
+                    <div id="RatingView" style="display: none;">
+                        <!-- Rating Form -->
+                        <form id="ratingForm" action="{{ route('store.rating') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="book_id" id="book-id" value="">
+                            <div class="mb-3">
+                                <label for="rating" class="form-label">Rating</label>
+                                <div id="rating" class="star-rating">
+                                    <span class="fa fa-star" data-rating="1"></span>
+                                    <span class="fa fa-star" data-rating="2"></span>
+                                    <span class="fa fa-star" data-rating="3"></span>
+                                    <span class="fa fa-star" data-rating="4"></span>
+                                    <span class="fa fa-star" data-rating="5"></span>
+                                </div>
+                                <input type="hidden" name="rating" id="rating-value" value="0">
+                                <span id="selected-rating" class="text-muted">0</span>/5
+                            </div>
+                            <div class="mb-3">
+                                <label for="review" class="form-label">Review</label>
+                                <textarea class="form-control" id="review" name="comment" rows="3"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary save-rating">Submit</button>
+                            <button type="button" class="btn btn-secondary" onclick="hideRatingView()">Cancel</button>
+                        </form>
+                    </div>
+
+
                 </div>
             </div>
         </div>
@@ -271,6 +318,44 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/alertifyjs/build/alertify.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const stars = document.querySelectorAll('#rating .fa-star');
+    const ratingValue = document.getElementById('rating-value');
+    const selectedRating = document.getElementById('selected-rating');
+
+    stars.forEach(star => {
+        star.addEventListener('click', function() {
+            const rating = this.getAttribute('data-rating');
+            ratingValue.value = rating;
+            selectedRating.textContent = rating;
+
+            stars.forEach(star => {
+                star.classList.remove('checked');
+            });
+
+            for (let i = 0; i < rating; i++) {
+                stars[i].classList.add('checked');
+            }
+        });
+    });
+});
+
+function showRatingView(button) {
+    const bookId = button.getAttribute('data-book-id');
+    document.getElementById('book-id').value = bookId;
+    document.getElementById('profileView').style.display = 'none';
+    document.getElementById('RatingView').style.display = 'block';
+}
+
+function hideRatingView() {
+    document.getElementById('profileView').style.display = 'block';
+    document.getElementById('RatingView').style.display = 'none';
+}
+
+        </script>
     <script>
         $(document).ready(function() {
             // SweetAlert for cancel button
@@ -305,23 +390,29 @@
 
             // SweetAlert for pinjam lagi button
             $('.borrow-again-button').on('click', function(e) {
-                e.preventDefault();
-                var form = $(this).closest('.borrow-again-form');
+    e.preventDefault();
+    var form = $(this).closest('.borrow-again-form');
 
-                Swal.fire({
-                    title: 'Apakah Anda yakin ingin meminjam buku ini lagi?',
-                    icon: 'question',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes',
-                    cancelButtonText: 'No'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        form.submit();
-                    }
-                });
-            });
+    Swal.fire({
+        title: 'Apakah Anda yakin ingin meminjam buku ini lagi?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            form.submit();
+        }
+    });
+});
+
+// Event handler untuk ulasan-button
+$('.ulasan-button').on('click', function() {
+    showRatingView();
+});
+
         });
     </script>
 
@@ -369,6 +460,8 @@
             }
         });
     </script>
+
+
     <script>
         $(document).ready(function(){
             $('#searchInput').on('input', function(){
@@ -416,6 +509,10 @@
             document.getElementById('profileView').style.display = 'block';
             document.getElementById('editProfileView').style.display = 'none';
         }
+
+
+
+
     </script>
 </body>
 </html>

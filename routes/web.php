@@ -148,8 +148,11 @@ Route::middleware(['auth', 'role:peminjam'])->group(function () {
     Route::get('peminjam/DetailBookOnline', [DetailBookOnline::class, 'showdetailform'])->name('peminjam.detailonline');
     Route::get('peminjam/IsiDetailBook', [IsiDetailBook::class, 'showdetailform'])->name('peminjam.isidetail');
 
+
     Route::get('peminjam/rent', [PeminjamanController::class, 'index'])->name('peminjam.rent');
 
+
+    Route::post('peminjam/dashboard/rating', [HomePageCustomer::class, 'storeRating'])->name('store.rating');
     Route::get('peminjam/dashboard/test-update-loan-status', [HomePageCustomer::class, 'updateLoanStatus']);
     Route::get('peminjam/dashboard', [HomePageCustomer::class, 'index'])->name('peminjam.home');
     Route::get('peminjam/dashboard/get', [HomePageCustomer::class, 'showProfile'])->name('profile.get');

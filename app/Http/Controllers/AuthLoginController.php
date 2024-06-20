@@ -95,44 +95,72 @@ class AuthLoginController extends Controller
         $request->validate([
             'book_id' => 'required|exists:books,id',
             'user_id' => 'required|exists:users,id',
-            // tambahkan validasi lainnya sesuai kebutuhan Anda
         ]);
 
+        $bookId = $request->book_id;
+        $userId = $request->user_id;
+
         // Periksa apakah buku tersebut sedang dipinjam atau telah selesai dipinjam oleh pengguna
-        $existingLoan = Loan::where('book_id', $request->book_id)
-                            ->where('user_id', $request->user_id)
-                            ->whereIn('status', ['pending', 'dipinjam'])
-                            ->exists();
+        $existingLoan = Loan::where('book_id', $bookId)
+            ->where('user_id', $userId)
+            ->whereIn('status', ['selesai', 'dikembalikan'])
+            ->first();
+
+            $existingLoan = Loan::where('book_id', $request->book_id)
+            ->where('user_id', $request->user_id)
+            ->whereIn('status', ['selesai', 'dikembalikan'])
+            ->first();
 
         if ($existingLoan) {
-            return response()->json(['message' => 'Buku sedang dipinjam atau belum dikembalikan'], 400);
+            // Jika ada, ubah status peminjaman menjadi 'pending'
+            $existingLoan->status = 'pending';
+            $existingLoan->borrow_date = now();
+            $existingLoan->return_date = null; // Hapus tanggal pengembalian jika ada
+            $existingLoan->save();
+
+            // Kurangi stok buku
+            $book = Book::findOrFail($request->book_id);
+            $book->stock -= 1;
+            $book->save();
+
+            // Redirect atau respons ke aplikasi Flutter dengan status 201
+            return response()->json(['success' => true, 'message' => 'Peminjaman berhasil'], 201);
+        }
+
+        // Periksa apakah pengguna sudah meminjam buku ini dalam status 'pending' atau 'dipinjam'
+        $activeLoan = Loan::where('book_id', $bookId)
+            ->where('user_id', $userId)
+            ->whereIn('status', ['pending', 'dipinjam'])
+            ->first();
+
+        if ($activeLoan) {
+            return response()->json(['error' => true, 'message' => 'Anda sudah meminjam buku ini sebelumnya.'], 400);
         }
 
         // Periksa stok buku
-        $book = Book::findOrFail($request->book_id);
+        $book = Book::findOrFail($bookId);
 
         if ($book->stock <= 0) {
-            return response()->json(['message' => 'Stok buku habis, tidak dapat melakukan peminjaman'], 400);
+            return response()->json(['error' => true, 'message' => 'Stok buku habis, tidak dapat melakukan peminjaman'], 400);
         }
 
         // Simpan data peminjaman
         $loan = Loan::create([
-            'book_id' => $request->book_id,
-            'user_id' => $request->user_id,
-            'borrow_date' => now(), // misalnya, gunakan tanggal saat ini
-            'status' => 'pending', // atur status sesuai kebutuhan Anda
+            'book_id' => $bookId,
+            'user_id' => $userId,
+            'borrow_date' => now(),
+            'status' => 'pending',
         ]);
 
         // Kurangi stok buku
         $book->stock--;
         $book->save();
 
-        // Beri respons bahwa peminjaman berhasil dibuat
-        return response()->json([
-            'message' => 'Loan created successfully',
-            'loan' => $loan,
-        ], 201);
+        return response()->json(['error' => true, 'message' => 'Gagal membuat peminjaman'], 400);
+    
+        return response()->json(['success' => true, 'message' => 'Peminjaman berhasil dilakukan.', 'loan' => $loan], 201);
     }
+
 
 
     public function updateProfileApi(Request $request)

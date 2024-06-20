@@ -207,11 +207,25 @@
         </main>
         <section class="reviews">
             <h2>Reviews</h2>
-            <div class="review">
-                <p><strong>Rape</strong></p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et eros eu quam scelerisque fermentum eget in nisl. Fusce ac lobortis magna, eget tristique lorem. Duis fringilla nisl eget metus pretium, sit amet accumsan velit tincidunt. Donec ac dolor ultricies, vestibulum nunc non, eleifend orci. In hac habitasse platea dictumst. Integer ac volutpat ipsum.</p>
-            </div>
+            @forelse($book->ratings as $rating)
+                <div class="review">
+                    <p><strong>{{ $rating->user->name }}</strong></p>
+                    <p>{{ $rating->comment }}</p>
+                    <p>Rating:
+                        @for ($i = 1; $i <= 5; $i++)
+                            @if ($i <= $rating->rating)
+                                <img src="{{ asset('images/star1.png') }}" alt="Star" style="width:20px; height:20px;">
+                            @else
+                                <img src="{{ asset('images/star-empty.png') }}" alt="Star" style="width:20px; height:20px;">
+                            @endif
+                        @endfor
+                    </p>
+                </div>
+            @empty
+                <p>No reviews yet.</p>
+            @endforelse
         </section>
+
     </div>
     <script src="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
     <script>

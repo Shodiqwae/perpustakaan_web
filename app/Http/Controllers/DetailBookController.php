@@ -1,9 +1,11 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Book;
 use App\Models\Loan;
+use App\Models\Rating;
 use App\Models\Favorite;
 use Carbon\Carbon;
 
@@ -27,17 +29,42 @@ class DetailBookController extends Controller
             'book_id' => 'required|exists:books,id',
         ]);
 
-        $existingLoan = Loan::where('book_id', $request->book_id)
-                            ->where('user_id', auth()->user()->id)
-                            ->whereIn('status', ['pending', 'dipinjam'])
+        $user = auth()->user();
+        $bookId = $request->book_id;
+
+        // Cek apakah ada peminjaman sebelumnya yang statusnya selesai atau dikembalikan
+        $existingLoan = Loan::where('book_id', $bookId)
+                            ->where('user_id', $user->id)
+                            ->whereIn('status', ['selesai', 'dikembalikan'])
                             ->first();
 
         if ($existingLoan) {
+            // Jika ada, ubah status peminjaman tersebut menjadi 'pending'
+            $existingLoan->status = 'pending';
+            $existingLoan->borrow_date = now();
+            $existingLoan->return_date = null; // Hapus tanggal pengembalian jika ada
+            $existingLoan->save();
+
+            // Kurangi stok buku
+            $book = Book::findOrFail($bookId);
+            $book->stock -= 1;
+            $book->save();
+
+            return redirect()->back()->with('success', 'Peminjaman berhasil dilakukan.');
+        }
+
+        // Jika tidak ada peminjaman sebelumnya, cek apakah sudah ada peminjaman yang masih aktif
+        $activeLoan = Loan::where('book_id', $bookId)
+                            ->where('user_id', $user->id)
+                            ->whereIn('status', ['pending', 'dipinjam'])
+                            ->first();
+
+        if ($activeLoan) {
             return redirect()->back()->with('error', 'Anda sudah meminjam buku ini sebelumnya.');
         }
 
         // Dapatkan buku yang akan dipinjam
-        $book = Book::findOrFail($request->book_id);
+        $book = Book::findOrFail($bookId);
 
         // Periksa apakah stok mencukupi
         if ($book->stock < 1) {
@@ -50,14 +77,15 @@ class DetailBookController extends Controller
 
         // Buat peminjaman baru
         $loan = new Loan();
-        $loan->user_id = auth()->user()->id;
-        $loan->book_id = $request->book_id;
+        $loan->user_id = $user->id;
+        $loan->book_id = $bookId;
         $loan->borrow_date = now();
         $loan->status = 'pending';
         $loan->save();
 
         return redirect()->back()->with('success', 'Peminjaman berhasil dilakukan.');
     }
+
     public function addToFavorite(Request $request)
     {
         $request->validate([
@@ -82,16 +110,12 @@ class DetailBookController extends Controller
         return redirect()->back()->with('success', 'Buku berhasil ditambahkan ke favorit.');
     }
 
-
-
     public function showApiCategory($id)
     {
-        {
-            $book = Book::with('categories')->findOrFail($id);
-            return response()->json([
-                'success' => true,
-                'data' => $book,
-            ]);
-        }
+        $book = Book::with('categories')->findOrFail($id);
+        return response()->json([
+            'success' => true,
+            'data' => $book,
+        ]);
     }
 }
